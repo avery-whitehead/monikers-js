@@ -11,7 +11,7 @@
 		<div class="stripe flex-center align-center game-code">
 			<div class="stripe-content">
 				<div id="setup-header">Your game code is:</div>
-				<h1>{{ roomCode }}</h1>
+				<h2>{{ roomCode }}</h2>
 			</div>
 		</div>
 

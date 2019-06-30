@@ -5,7 +5,6 @@
         <div style="clear: both"></div>
         <button id="goto-join-menu" class="btn big primary" @click="goto('join')">Join Game</button>
         <div style="clear: both"></div>
-        <!--<button class="btn big secondary" @click="gotoRules()">Rules</button>-->
     </div>
 
     <div id="create-game-menu" class="menu" v-show="tab === 'create'">

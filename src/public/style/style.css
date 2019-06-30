@@ -1,38 +1,21 @@
+/* Fonts */
 :root {
     --shadow-config: 0px 2px 4px 0px;
-    --header-font: 'Amaranth', sans-serif;
+    --header-font: 'Fredoka One', cursive;
     --body-font: 'Arimo', sans-serif;
+    --number-font: 'Raleway', sans-serif;
     --button-font: 'Arimo', sans-serif
 }
 
+/* Colors */
 :root {
-    --lilac3: hsl(292, 18%, 75%);
-    --lilac4: hsl(292, 18%, 65%);
-    --lilac5: hsl(292, 18%, 55%);
-    --lilac6: hsl(292, 18%, 45%);
-    --grey0: hsl(225, 4%, 95%);
-    --grey1: hsl(225, 4%, 85%);
-    --grey2: hsl(225, 4%, 75%);
-    --grey3: hsl(225, 4%, 65%);
-    --grey4: hsl(225, 4%, 55%);
-    --grey5: hsl(225, 4%, 45%);
-    --grey6: hsl(225, 4%, 35%);
-    --grey7: hsl(225, 4%, 25%);
-    --grey8: hsl(225, 4%, 19%);
-    --blue1: hsl(321, 17%, 85%);
-    --blue2: hsl(321, 17%, 70%);
-    --blue3: hsl(321, 17%, 55%);
-    --blue4: hsl(321, 17%, 50%);
-    --blue5: hsl(321, 17%, 40%);
-    --gold1: hsl(54, 100%, 90%);
-    --gold2: hsl(54, 100%, 70%);
-    --gold3: hsl(54, 100%, 50%);
-    --gold4: hsl(54, 100%, 40%);
-    --gold5: hsl(54, 100%, 30%);
-    --purp3: hsl(258, 50%, 55%);
-    --purp2: hsl(258, 50%, 75%);
-    --shade: rgba(0, 0, 0, 0.3);
-    --shade1: rgba(0, 0, 0, 0.7)
+    --background-color: hsl(0, 0%, 99%);
+    --body-font-color: rgba(0, 0, 0, 0.7);
+    --body-font-color-trans: rgba(0, 0, 0, 0.4);
+    --blue0: hsl(192, 100%, 50%);
+    --blue1: hsla(192, 100%, 50%, 0.4);
+    --shade0: rgba(0, 0, 0, 0.3);
+    --shade1: rgba(0, 0, 0, 0.7);
 }
 
 html,
@@ -50,21 +33,22 @@ body {
 }
 
 #wrapper.light-theme {
-    background-color: white;
-    color: var(--grey5)
+    background-color: var(--background-color);
+    color: var(--body-font-color)
 }
 
 h1,
 h2,
 h3 {
-    color: var(--grey5);
+    color: var(--body-font-color);
     font-family: var(--header-font);
 }
 
 h1 {
+    color: var(--blue0);
     font-size: 36px;
     margin-top: 10px;
-    margin-bottom: 10px
+    margin-bottom: 10px;
 }
 
 @media screen and (max-width: 480px) {
@@ -108,7 +92,7 @@ div.chunk-narrow {
 
 p,
 ul {
-    color: var(--grey4);
+    color: var(--body-font-color);
     margin: 5px 5px 5px 5px
 }
 
@@ -124,7 +108,7 @@ p a {
 }
 
 a {
-    color: var(--blue4)
+    color: var(--body-font-color)
 }
 
 ul {
@@ -138,7 +122,7 @@ ul {
 }
 
 .tip {
-    color: var(--grey4)
+    color: var(--body-font-color)
 }
 
 .disconnected {
@@ -151,9 +135,7 @@ ul {
 }
 
 div.warning {
-    background-color: var(--gold1);
-    border: solid 1px var(--gold3);
-    color: var(--gold5);
+    color: var(--body-font-color);
     border-radius: 2px;
     margin: 10px 80px;
     padding: 0 10px;
@@ -164,7 +146,6 @@ div.warning {
 hr {
     height: 1px;
     border: 0;
-    background-color: var(--grey1)
 }
 
 .flex-center {
@@ -190,7 +171,7 @@ hr {
 }
 
 .view {
-    background-color: #f6eded;
+    background-color: var(--background-color);
     height: 100%;
     display: flex;
     flex-direction: column
@@ -198,6 +179,10 @@ hr {
 
 .view .view-container {
     margin: auto
+}
+
+.menu {
+    position: fixed;
 }
 
 #home #home-menu {
@@ -211,12 +196,17 @@ hr {
 }
 
 div#setup-header {
-    color: var(--grey4);
+    color: var(--body-font-color);
 }
 
 div#room-setup div.game-code h1 {
     font-family: var(--header-font);
     margin-top: 0
+}
+
+div#room-setup h2 {
+    font-family: var(--number-font);
+    font-size: 40px;
 }
 
 div#room-setup div.chunk.users {
@@ -232,37 +222,10 @@ div#room-setup ul.users {
 
 div#room-setup li {
     font-weight: bold;
-    font-family: var(--header-font);
-    color: var(--grey5);
+    font-family: var(--body-font);
+    color: var(--body-font-color);
     line-height: 1.4;
     font-size: 1.4em;
-}
-
-#drawing-pad {
-    position: relative;
-    border: solid 5px var(--lilac4);
-    box-shadow: 0px 3px 6px 0px var(--shade);
-    width: 100%
-}
-
-canvas {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%
-}
-
-canvas#old-paint {
-    background-color: white;
-    z-index: 1
-}
-
-canvas#new-paint {
-    z-index: 2
-}
-
-.canvas-aligned {
-    width: 100%
 }
 
 #game-info {
@@ -270,17 +233,7 @@ canvas#new-paint {
     font-family: var(--header-font)
 }
 
-#game-info h1.prompt {
-    color: var(--lilac4);
-    font-size: 26px;
-    margin: 0 0 0 0
-}
-
 @media screen and (max-width: 480px) {
-    #game-info h1.prompt {
-        font-size: 20px
-    }
-
     #game-info h3 {
         font-size: 16px
     }
@@ -289,18 +242,6 @@ canvas#new-paint {
 #game-info .current-turn {
     margin-left: 10px;
     margin: 0 0 0 10px
-}
-
-#drawing-actions {
-    direction: rtl
-}
-
-#drawing-actions #drawing-actions-left>* {
-    float: left
-}
-
-#drawing-actions #drawing-actions-right>* {
-    float: right
 }
 
 #conn-overlay {
@@ -333,7 +274,7 @@ canvas#new-paint {
     padding: 0 15px;
     margin: 10px 10px;
     cursor: pointer;
-    transition: background-color .15s, color .15s, border .15s, box-shadow .15s
+    transition: background-color .2s, color .2s, border .2s, box-shadow .2s
 }
 
 .btn.big {
@@ -341,58 +282,60 @@ canvas#new-paint {
 }
 
 .btn:disabled {
-    border-color: var(--grey1);
-    background-color: white;
-    color: var(--grey3);
+    border-color: var(--blue0);
+    background-color: var(--background-color);
+    color: var(--blue0);
     cursor: default
 }
 
 .btn.primary:not(:disabled) {
-    background-color: var(--lilac4);
-    color: white;
-    border-color: var(--lilac4)
+    background-color: var(--blue0);
+    color: var(--background-color);
+    border-color: var(--blue0);
 }
 
 @media (any-hover: hover) {
     .btn.primary:not(:disabled):hover {
-        background-color: var(--lilac3);
-        border-color: var(--lilac3)
+        background-color: var(--background-color);
+        color: var(--blue0);
+        border-color: var(--blue0);
     }
 }
 
 .btn.primary:not(:disabled):active {
-    background-color: var(--lilac5);
-    border-color: var(--lilac5)
+    background-color: var(--blue0);
+    border-color: var(--blue0)
 }
 
 .btn.secondary:not(:disabled) {
-    background-color: white;
-    color: var(--blue4);
-    border-color: var(--blue4)
+    background-color: var(--background-color);
+    color: var(--blue0);
+    border-color: var(--blue0)
 }
 
 @media (any-hover: hover) {
     .btn.secondary:not(:disabled):hover {
-        color: var(--blue2);
-        border-color: var(--blue2)
+        color: var(--blue0);
+        border-color: var(--blue0)
     }
 }
 
 .btn.secondary:not(:disabled):active {
-    color: var(--blue5);
-    border-color: var(--blue5)
+    color: var(--blue0);
+    border-color: var(--blue0)
 }
 
 .btn.tertiary {
-    color: var(--blue2);
+    color: var(--blue0);
     background: none;
     border-radius: 0;
-    border: hidden;
-    border-top: solid 2px #0000;
-    border-bottom: solid 2px var(--blue2);
-    padding: 0 2px;
+    border-top: solid 2px transparent;
+    border-bottom: solid 2px var(--blue0);
+    border-left: solid 2px transparent;
+    border-right: solid 2px transparent;
+    padding: 5px;
     line-height: 20px;
-    min-width: 0
+    min-width: 0px;
 }
 
 @media (any-hover: hover) {
@@ -408,14 +351,19 @@ input[type="tel"],
 input[type="number"] {
     border-style: hidden;
     border-bottom: solid 2px;
-    border-bottom-color: var(--lilac4);
-    /*background-color: var(--grey0);*/
+    border-bottom-color: var(--body-font-color-trans);
     background: none;
     line-height: 40px;
     text-align: center;
     margin: 10px 0;
-    color: var(--grey8);
+    color: var(--body-font-color);
     font-weight: normal
+}
+
+input[type="text"]:valid,
+input[type="tel"]:valid,
+input[type="number"]:valid {
+    border-bottom-color: var(--body-font-color);
 }
 
 input[type="text"]:invalid,
@@ -427,7 +375,7 @@ input[type="number"]:invalid {
 input[type="text"]::placeholder,
 input[type="tel"]::placeholder,
 input[type="number"]::placeholder {
-    opacity: 0.5
+    color: var(--body-font-color-trans);
 }
 
 @media screen and (max-width: 425px) {
@@ -447,71 +395,6 @@ input[type="number"]::placeholder {
     }
 }
 
-.dropup {
-    position: relative;
-    margin: 10px 10px
-}
-
-.dropup button {
-    border: solid 2px rgba(0, 0, 0, 0);
-    border-radius: 100%;
-    background-color: white;
-    color: var(--grey7);
-    line-height: 40px;
-    width: 40px;
-    height: 40px;
-    padding: 0;
-    margin: 0;
-    flex-shrink: 0;
-    cursor: pointer
-}
-
-@media (any-hover: hover) {
-    .dropup button:hover {
-        border-color: var(--grey0)
-    }
-}
-
-.dropup button.expanded {
-    border-color: var(--grey0);
-    background-color: var(--grey0)
-}
-
-.dropup .dropup-content {
-    border: solid 1px var(--grey1);
-    border-radius: 4px;
-    background-color: white;
-    box-shadow: 0px 3px 6px 0px var(--shade);
-    text-align: left;
-    font-size: 13px;
-    position: absolute;
-    bottom: 100%;
-    left: 0;
-    z-index: 3;
-    white-space: nowrap;
-    padding: 4px
-}
-
-.dropup ul.dropup-list {
-    margin: 0
-}
-
-.dropup ul.dropup-list li {
-    color: var(--grey7);
-    font-family: var(--header-font);
-    border-radius: 4px;
-    padding: 10px;
-    cursor: pointer
-}
-
-.dropup ul.dropup-list li:not(:last-child) {
-    margin-bottom: 4px
-}
-
-.dropup ul.dropup-list li:hover {
-    background-color: var(--grey0)
-}
-
 .dialog-component .dialog-overlay {
     width: 100%;
     height: 100%;
@@ -524,11 +407,17 @@ input[type="number"]::placeholder {
 
 .dialog-component .dialog-window {
     z-index: 10;
-    background-color: white;
-    border: solid 1px var(--grey1);
+    color: var(--body-font-color);
+    background-color: var(--background-color);
+    border: solid 1px var(--background-color);
     border-radius: 4px;
     padding: 10px 20px;
-    box-shadow: 0px 3px 6px 0px var(--shade)
+    box-shadow: 0px 3px 6px 0px var(--shade0)
+}
+
+.dialog-window h3 {
+    color: var(--body-font-color);
+    font-family: var(--body-font);
 }
 
 .dialog-component .dialog-actions {
