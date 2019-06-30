@@ -1,0 +1,7 @@
+const CONNECTION_STATE = {
+    'CONNECT': 'CONNECT',
+    'RECONNECT': 'RECONNECT',
+    'DISCONNECT': 'DISONNECT'
+};
+
+module.exports = CONNECTION_STATE;
