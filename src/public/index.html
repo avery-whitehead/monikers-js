@@ -30,7 +30,7 @@
                     </div>
                 </div>
             </div>
-            <setup-view v-if="state.view === 'setup'" :room-code="state.gameState === undefined ? undefined : state.gameState.roomCode" :usernames="usernames"></setup-view>
+            <setup-view v-if="state.view === 'setup'" :room-code="state.gameState === undefined ? undefined : state.gameState.roomCode" :usernames="usernames" :red-team="redTeam" :blue-team="blueTeam"></setup-view>
         </div>
         <script src="./js/index.bundle.min.js" crossorigin></script>
         <link href="https://fonts.googleapis.com/css?family=Fredoka+One" rel="stylesheet">
