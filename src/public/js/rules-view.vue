@@ -4,17 +4,15 @@
 			<div class="stripe flex-center">
 				<div id="rules-content" class="stripe-content normal-text">
 					<div class="align-justify">
-						<p>Monikers is played in <strong>3 rounds</strong>. In each round, each person from each team has <strong>60</strong> seconds to describe as many people or characters from a deck of cards, so that their team can guess who it is.</p> 
-						<p>There's no limit to the number of guesses, and <strong>cards can be skipped</strong> if a team can't guess who they are.</p>
-						<p><strong>The teams keep the cards they guessed correctly</strong> to score after the round. Skipped cards are reshuffled into the deck.</p>
-						<p><strong>The teams take it in turn giving clues</strong>, and each player in each team should take it in turn to give clues too.</p>
-						<p><strong>Each of the 3 rounds ends when all the cards from the deck have been guessed correctly</strong>. After that, the teams add the point values from the cards they correctly guessed and <strong>shuffle the cards back together into one deck</strong> for the next round. The team with the lowest score starts the next round.</p>
-						<br>
+						<p>Monikers is played in <strong>3 rounds</strong>. In each round, teams have <strong>60</strong> seconds to describe as many people or characters from a deck of cards, so that their team can guess who it is.</p> 
 						<p>Each of the three rounds has a restriction on how clues can be given:</p>
 						<p>ROUND 1: <strong>Use any words, sounds or gestures</strong>. You can't use the name on the card during your description, but you can use the clues written beneath the name.</p>
 						<p>ROUND 2: <strong>Use only 1 word as a clue</strong>. You aren't allowed to use sounds, gestures or the name itself.</p>
 						<p>ROUND 3: <strong>Use only charades</strong>. No words are allowed. Sound effects are allowed (within reason).</p>
-						<br>
+						<p>There's no limit to the number of guesses, and <strong>cards can be skipped</strong> if a team can't guess who they are.</p>
+						<p><strong>The teams keep the cards they guessed correctly</strong> to score after the round. Skipped cards are reshuffled into the deck.</p>
+						<p><strong>The teams take it in turn giving clues</strong>, and each player in each team should take it in turn to give clues too.</p>
+						<p><strong>Each of the 3 rounds ends when all the cards from the deck have been guessed correctly</strong>. After that, the teams add the point values from the cards they correctly guessed and <strong>shuffle the cards back together into one deck</strong> for the next round. The team with the lowest score starts the next round.</p>
 						<p><strong>The team with the highest total score after 3 rounds wins</strong> (but it's not necessary to keep score at all).</p>
 					</div>
 					<br>
