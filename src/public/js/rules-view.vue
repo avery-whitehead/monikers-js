@@ -15,7 +15,6 @@
 						<p><strong>Each of the 3 rounds ends when all the cards from the deck have been guessed correctly</strong>. After that, the teams add the point values from the cards they correctly guessed and <strong>shuffle the cards back together into one deck</strong> for the next round. The team with the lowest score starts the next round.</p>
 						<p><strong>The team with the highest total score after 3 rounds wins</strong> (but it's not necessary to keep score at all).</p>
 					</div>
-					<br>
 				</div>
 			</div>
 			<div id="rules-cards" class="stripe flex-center">
