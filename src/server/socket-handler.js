@@ -174,7 +174,7 @@ function logout(sock) {
 			if(room.phase === GAME_PHASE.SETUP) {
 				// if room has no game yet, remove the user from the room completely
 				room.dropUser(user);
-				console.log(`Left room: ${user.logName}from room-${room.roomCode}`);
+				console.log(`Left: ${user.logName} from room-${room.roomCode}. Room users: ${room.users.length}`);
 			} else {
 				debugLog(`Logout ${user.logName}`);
 			}
@@ -201,8 +201,10 @@ function joinRoom(user, room, rejoin, isHost = false) {
 
 function joinTeam(user, room, team) {
 	if(room.addTeam(user, team)) {
-		console.log(`${user.logName} joined team ${team} in room ${room.roomCode}.`);
+		console.log(`${user.logName} joined team ${team} in room-${room.roomCode}`);
+		user.setTeam(team);
 	}
+	return user;
 }
 
 const GamePrecond = {
@@ -275,7 +277,6 @@ function broadcastRoomState(io, room, messageName, addtlProcessFn) {
 	if(addtlProcessFn) {
 		state = addtlProcessFn(state);
 	}
-	console.log(JSON.stringify(state, null, 2));
 
 	if(room.phase === GAME_PHASE.SETUP) {
 		io.in(room.roomCode).emit(messageName, {

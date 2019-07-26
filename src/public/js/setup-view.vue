@@ -17,7 +17,7 @@
 
 		<div class="stripe flex-center align-center users">
 			<div class="stripe-content users">
-				<div id="setup-header">Players:</div>
+				<div id="setup-header">Unassigned players:</div>
 				<ul class="users">
 					<li v-for="username in usernames" :key="'0' + username">{{username}}</li>
 				</ul>

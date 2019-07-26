@@ -30,7 +30,7 @@ const app = new Vue({
 			return this.state.gameState && this.state.gameState.roomCode;
 		},
 		usernames() {
-			return this.state.gameState && this.state.gameState.getUsernames();
+			return this.state.gameState && this.state.gameState.getNoTeam();
 		},
 		reds() {
 			return this.state.gameState && this.state.gameState.getReds();

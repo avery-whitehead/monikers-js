@@ -5,16 +5,23 @@ class User {
 		if(!Util.validateUsername(name)) {
 			return undefined;
 		}
-
 		this.socket = socket;
 		this.name = name;
-		this.gameRoom = undefined; // TODO currently this references the room obj. Change this to just the code, to avoid circular refs
+		this.gameRoom = undefined;
 		this.team = undefined;
+		this.captain = false;
 	}
 
 	setGameRoom(gameRoom) {
 		this.gameRoom = gameRoom;
 	}
+	setTeam(team) {
+		this.team = team;
+	}
+	setCaptain(captain) {
+		this.captan = captain;
+	}
+
 	get connected() {
 		return Boolean(this.socket && this.socket.connected);
 	}

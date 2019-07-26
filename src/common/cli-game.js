@@ -18,11 +18,20 @@ function generateClientGameState() {
 		getUsernames() {
 			return this.users.map(u => u.name);
 		},
+		getNoTeam() {
+			return this.users
+				.filter(u => u.team === undefined)
+				.map(u => u.name);
+		},
 		getReds() {
-			return this.reds.map(u => u.name);
+			return this.users
+				.filter(u => u.team === 'red')
+				.map(u => u.name);
 		},
 		getBlues() {
-			return this.blues.map(u => u.name);
+			return this.users
+				.filter(u => u.team === 'blue')
+				.map(u => u.name);
 		},
 		adoptJson(json) {
 			return Object.assign(this, json);

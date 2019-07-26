@@ -23,7 +23,7 @@ function triggerDelayedRoomTeardown(room) {
 }
 function teardownRoom(room) {
 	rooms.delete(room.roomCode);
-	console.log(`Teardown for room ${room.roomCode}. Room count: ${rooms.size}`);
+	console.log(`Teardown for room-${room.roomCode}. Room count: ${rooms.size}`);
 }
 
 function generateRoomCode() {

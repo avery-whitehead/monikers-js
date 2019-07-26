@@ -143,9 +143,9 @@ const ClientAdapter = {
 	generateStateJson(gameRoom, pickFields) {
 		let res = {
 			roomCode: gameRoom.roomCode,
-			users: _.map(gameRoom.users, (u) => ({name: u.name, connected: u.connected})),
-			reds: _.map(gameRoom.reds, (u) => ({name: u.name, connected: u.connected})),
-			blues: _.map(gameRoom.blues, (u) => ({name: u.name, connected: u.connected})),
+			users: _.map(gameRoom.users, (u) => ({name: u.name, connected: u.connected, team: u.team})),
+			reds: _.map(gameRoom.reds, (u) => ({name: u.name, connected: u.connected, team: u.team})),
+			blues: _.map(gameRoom.blues, (u) => ({name: u.name, connected: u.connected, team: u.team})),
 			round: gameRoom.round,
 			phase: gameRoom.phase,
 			turn: gameRoom.turn,
