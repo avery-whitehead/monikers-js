@@ -4,6 +4,7 @@
 	--body-font: 'Arimo', sans-serif;
 	--number-font: 'Raleway', sans-serif;
 	--button-font: 'Arimo', sans-serif;
+	--card-font: 'Rubik', sans-serif;
 }
 
 html, body {
@@ -61,6 +62,9 @@ div.chunk-narrow {
 }
 .align-left {
 	text-align: left;
+}
+.align-justify {
+	text-align: justify;
 }
 
 p, ul {
@@ -157,9 +161,25 @@ hr {
 /* ============================================================================
 	Index page
 ============================================================================ */
+
 #title-banner {
 	font-size: 7em;
 	color: var(--blue0);
+}
+
+/* ============================================================================
+	Rules page
+============================================================================ */
+
+div#rules-content {
+	max-width: 875px;
+}
+div#rules-cards {
+	margin-bottom: 42px;
+}
+div#rules-card {
+	margin-left: 15px;
+	margin-right: 15px;
 }
 
 /* ============================================================================
@@ -199,6 +219,85 @@ div#room-setup {
 		padding: 0 80px 0 80px;
 		color: var(--grey7);
 	}
+}
+
+/* ============================================================================
+	Cards
+============================================================================ */
+
+div.card {
+	position: relative;
+	font-family: var(--card-font);
+	box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+	border-radius: 30px;
+	min-height: 400px;
+	max-width: 300px;
+	padding: 30px;
+}
+div.card-title {
+	font-size: 30px;
+	font-weight: bold;
+	color: var(--grey7);
+	padding-bottom: 15px;
+}
+div.card-desc {
+	color: var(--grey6);
+	font-size: 17px;
+	margin-bottom: 37px;
+}
+div.card-sep {
+	color: var(--grey2);
+	letter-spacing: 4px;
+	padding-bottom: 5px;
+}
+div.card-type {
+	font-size: 17px;
+	font-weight: bold;
+	letter-spacing: 4px;
+}
+div.card-points {
+	position: absolute;
+	bottom: 0;
+	left: 50%;
+	-webkit-transform: translateX(-50%);
+	transform: translateX(-50%);
+	padding: 10px 20px 20px 20px;
+	font-size: 13px;
+	border-top-left-radius: 50%;
+	border-top-right-radius: 50%;
+	line-height: 18px;
+	font-weight: bold;
+}
+p.point-score {
+	font-size: 20px;
+}
+div.points-one-t {
+	color: var(--green1);
+}
+div.points-one-p {
+	background-color: var(--green1);
+	color: white;
+}
+div.points-two-t {
+	color: var(--blue0);
+}
+div.points-two-p {
+	background-color: var(--blue0);
+	color: white;
+}
+div.points-three-t {
+	color: var(--purp1);
+}
+div.points-three-p {
+	background-color: var(--purp1);
+	color: white;
+}
+div.points-four-t {
+	color: var(--red1);
+}
+div.points-four-p {
+	background-color: var(--red1);
+	color: white;
 }
 
 /* ============================================================================
