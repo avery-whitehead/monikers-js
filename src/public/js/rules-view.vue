@@ -4,7 +4,7 @@
 			<div class="stripe flex-center">
 				<div id="rules-content" class="stripe-content normal-text">
 					<div class="align-justify">
-						<p>Monikers is played in <strong>3 rounds</strong>. In each round, teams have <strong>60</strong> seconds to describe as many people or characters from a deck of cards, so that their team can guess who it is.</p> 
+						<p>Monikers is played in <strong>3 rounds</strong>. In each round, teams have <strong>60</strong> seconds to describe as many people, characters or things from the deck of cards.</p> 
 						<p>Each of the three rounds has a restriction on how clues can be given:</p>
 						<p>ROUND 1: <strong>Use any words, sounds or gestures</strong>. You can't use the name on the card during your description, but you can use the clues written beneath the name.</p>
 						<p>ROUND 2: <strong>Use only 1 word as a clue</strong>. You aren't allowed to use sounds, gestures or the name itself.</p>
