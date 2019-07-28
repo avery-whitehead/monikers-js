@@ -19,27 +19,36 @@
 			</div>
 			<div id="rules-cards" class="stripe flex-center">
 				<div class="flex-center">
-					<div id="rules-card" class="card">
-						<div class="card-title align-cenetr">A Neanderthal</div>
+					<card
+						v-for="card in json"
+						v-bind:key="card.name"
+						v-bind:name="card.name"
+						v-bind:description="card.description"
+						v-bind:category="card.category"
+						v-bind:points="card.points"
+						id="rules-card"
+					/>
+					<!--<div id="rules-card" class="card align-center">
+						<div class="card-title">A Neanderthal</div>
 						<div class="card-desc align-justify">A member of an extinct species closely related to humans. Research suggests that interbreeding between the two groups occured, with modern non-African humans possessing 1-4% of their genome. They made tools, built dwellings, and had a form of language.</div>
 						<div class="card-sep">·············</div>
 						<div class="card-type points-one-t">ET CETERA</div>
 						<div class="card-points points-one-p"><p class="point-score">1</p>POINT</div>
 					</div>
-					<div id="rules-card" class="card">
-						<div class="card-title align-cenetr">The Eye of Sauron</div>
+					<div id="rules-card" class="card align-center">
+						<div class="card-title">The Eye of Sauron</div>
 						<div class="card-desc align-justify">A manifestation of the title character in J.R.R. Tolkien's fantasy series The Lord of the Rings. Frodo describes it as "rimmed with fire, but was itself glazed, yellow as a cat's, watchful and intent, and the black slit of its pupil opened on a pit, a window into nothing."</div>
 						<div class="card-sep">·············</div>
 						<div class="card-type points-two-t">FICTIONAL CHARACTER</div>
 						<div class="card-points points-two-p"><p class="point-score">2</p>POINTS</div>
 					</div>
-					<div id="rules-card" class="card">
-						<div class="card-title align-cenetr">Catherine the Great</div>
+					<div id="rules-card" class="card align-center">
+						<div class="card-title">Catherine the Great</div>
 						<div class="card-desc align-justify">The "Empress and Autocrat of all the Russias", who led the country's Golden Age: an era of revitalization and recognition as a great power of Europe. She took many lovers during her reign, leading to legends about her sexual proclivities, including an erotic desire for horses.</div>
 						<div class="card-sep">·············</div>
 						<div class="card-type points-three-t">HISTORICAL FIGURE</div>
 						<div class="card-points points-three-p"><p class="point-score">3</p>POINTS</div>
-					</div>
+					</div>-->
 				</div>
 			</div>
 			<div class="stripe flex-center">
@@ -57,14 +66,29 @@
 </template>
 
 <script>
-const Store = require('./state');
-const VIEW = require('./view');
-export default {
-	name: 'RulesView',
-	methods: {
-		back() {
-			Store.setView(Store.state.previousView);
-		}
-	},
-};
+	const Store = require('./state');
+	const VIEW = require('./view');
+	import Card from './card';
+	import cardsJson from './cards.json';
+	const n = 3;
+	let cardsSample = _.sampleSize(cardsJson, n);
+	export default {
+		name: 'RulesView',
+		created: {
+			
+		},
+		data() {
+			return {
+				json: cardsSample
+			}
+		},
+		components: {
+			Card
+		},
+		methods: {
+			back() {
+				Store.setView(Store.state.previousView);
+			}
+		},
+	};
 </script>

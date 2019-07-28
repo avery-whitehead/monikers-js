@@ -230,30 +230,46 @@ div.card {
 	font-family: var(--card-font);
 	box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 	border-radius: 30px;
-	min-height: 400px;
-	max-width: 300px;
+	height: 400px;
+	width: 300px;
 	padding: 30px;
 }
 div.card-title {
-	font-size: 30px;
+	font-size: 28px;
 	font-weight: bold;
 	color: var(--grey7);
 	padding-bottom: 15px;
 }
 div.card-desc {
+	position: absolute;
 	color: var(--grey6);
 	font-size: 17px;
-	margin-bottom: 37px;
+	text-align: justify;
+	top: 25%;
+	left: 50%;
+	-webkit-transform: translateX(-50%);
+	transform: translateX(-50%);
+	width: 300px;
 }
 div.card-sep {
+	position: absolute;
 	color: var(--grey2);
 	letter-spacing: 4px;
-	padding-bottom: 5px;
+	left: 50%;
+	-webkit-transform: translateX(-50%);
+	transform: translateX(-50%);
+	bottom: 25%;
 }
 div.card-type {
+	position: absolute;
 	font-size: 17px;
 	font-weight: bold;
 	letter-spacing: 4px;
+	white-space: nowrap;
+	left: 50%;
+	-webkit-transform: translateX(-50%);
+	transform: translateX(-50%);
+	bottom: 19%;
 }
 div.card-points {
 	position: absolute;
