@@ -100,6 +100,7 @@ const MessageHandlers = {
 	[MESSAGE.START_GAME](io, sock, data) {
 		GamePrecond.sockHasUser(sock);
 		GamePrecond.userIsInARoom(sock.user);
+		GamePrecond.allPlayersInTeam(sock.user.gameRoom);
 		let rm = sock.user.gameRoom;
 		rm.startNewRound();
 		broadcastRoomState(io, rm, MESSAGE.START_GAME);
@@ -267,6 +268,11 @@ const GamePrecond = {
 	nameIsTakenInRoom(username, room) {
 		if(room.findUser(username) === undefined) {
 			throw new GameError(`Username ${username} DNE in room ${room.roomCode}`, "This username doesn't exist in this room");
+		}
+	},
+	allPlayersInTeam(room) {
+		if (room.hasUnassignedPlayers()) {
+			throw new GameError(`Room ${room.roomCode} has unassigned players`, 'Not all players have joined a team');
 		}
 	}
 };

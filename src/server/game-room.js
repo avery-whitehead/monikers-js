@@ -4,6 +4,7 @@ const Util = require('../common/util');
 const Prompts = require('./prompts');
 const _ = require('lodash');
 const GameError = require('./game-error');
+const cardsJson = require('../public/js/cards.json');
 
 const MAX_USERS = 10;
 
@@ -23,6 +24,9 @@ class GameRoom {
 		this.hint = undefined;
 		this.faker = undefined;
 
+		this.cards = [];
+		this.redCards = [];
+		this.blueCards = [];
 		this.strokes = [];
 	}
 	addUser(user, isHost = false) {
@@ -91,6 +95,9 @@ class GameRoom {
 		this.hint = prompt.hint;
 		this.faker = Util.randomItemFrom(this.users);
 		this.strokes = [];
+		this.cards = _.sampleSize(cardsJson, this.users.length * 10);
+		console.log(this.cards);
+		console.log(this.cards.length);
 		console.log(`New round: Room-${this.roomCode} start round ${this.round}`);
 	}
 	invokeSetup() {
@@ -133,6 +140,9 @@ class GameRoom {
 	isFull() {
 		return this.users.length >= MAX_USERS;
 	}
+	hasUnassignedPlayers() {
+		return (this.reds.length + this.blues.length) != this.users.length;
+	}
 	isDead() {
 		// all users are disconnected
 		return this.users.length === 0 || _.every(this.users, u => (!u.connected));
@@ -146,6 +156,7 @@ const ClientAdapter = {
 			users: _.map(gameRoom.users, (u) => ({name: u.name, connected: u.connected, team: u.team})),
 			reds: _.map(gameRoom.reds, (u) => ({name: u.name, connected: u.connected, team: u.team})),
 			blues: _.map(gameRoom.blues, (u) => ({name: u.name, connected: u.connected, team: u.team})),
+			cards: gameRoom.cards,
 			round: gameRoom.round,
 			phase: gameRoom.phase,
 			turn: gameRoom.turn,

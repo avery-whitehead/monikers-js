@@ -15,7 +15,8 @@ export default {
         name: String,
         description: String,
         category: String,
-        points: String
+        points: String,
+        teamWon: String
     },
     computed: {
         cardTypeClass() {

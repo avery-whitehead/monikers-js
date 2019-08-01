@@ -13,6 +13,9 @@ function generateClientGameState() {
 		keyword: undefined,
 		hint: undefined,
 		fakerName: undefined,
+		cards: [],
+		redCards: [],
+		blueCards: [],
 		strokes: [],
 
 		getUsernames() {

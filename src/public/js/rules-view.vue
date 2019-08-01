@@ -49,8 +49,10 @@
 	const VIEW = require('./view');
 	import Card from './card';
 	import cardsJson from './cards.json';
+
 	const n = 3;
 	let cardsSample = _.sampleSize(cardsJson, n);
+	
 	export default {
 		name: 'RulesView',
 		created: {

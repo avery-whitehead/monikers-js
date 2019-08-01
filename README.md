@@ -21,5 +21,6 @@ Go to `localhost:3000`
 
 ### Todo:
 
-* Teams for the lobby
-* Choose a captain for each team
+* Rotate captains
+* Stop game from starting if players are unassigned
+* The entire game, I guess?

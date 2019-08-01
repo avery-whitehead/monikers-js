@@ -20,7 +20,7 @@ const app = new Vue({
 		SetupView,
 		GameView,
 		GameMenu,
-		RulesView
+		RulesView,
 	},
 	data: {
 		state: Store.state,
