@@ -22,5 +22,5 @@ Go to `localhost:3000`
 ### Todo:
 
 * Rotate captains
-* Stop game from starting if players are unassigned
+* Extract card select screen to different view
 * The entire game, I guess?

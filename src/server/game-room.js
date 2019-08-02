@@ -96,8 +96,6 @@ class GameRoom {
 		this.faker = Util.randomItemFrom(this.users);
 		this.strokes = [];
 		this.cards = _.sampleSize(cardsJson, this.users.length * 10);
-		console.log(this.cards);
-		console.log(this.cards.length);
 		console.log(`New round: Room-${this.roomCode} start round ${this.round}`);
 	}
 	invokeSetup() {

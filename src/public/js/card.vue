@@ -1,6 +1,6 @@
 <template>
-    <div class="card">
-        <div class="card-title" :class="name">{{name}}</div>
+    <div class="card" @click="$emit('select')">
+        <div class="card-title">{{name}}</div>
         <div class="card-desc">{{description}}</div>
         <div class="card-sep">·············</div>
         <div class="card-type" :class="cardTypeClass">{{category}}</div>

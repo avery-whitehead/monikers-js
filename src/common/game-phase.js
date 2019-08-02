@@ -1,4 +1,3 @@
-
 const GAME_PHASE = {
 	'SETUP': 'SETUP',
 	'PLAY': 'PLAY',

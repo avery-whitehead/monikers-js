@@ -16,14 +16,29 @@
 					This will end the current round.
 				</div>
 			</confirmation>
-			<div class="stripe">
+			<div class="stripe flex-center">
 				<div id="game-info" class="stripe-content align-center">
 					<p>Choose five cards you like the look of</p>
 					<p>(don't tell anyone)</p>
 				</div>
 			</div>
+			<div class="stripe flex-center" id="ten-cards">
+				<card
+					v-for="card in playerCards"
+					class="card-small"
+					:class="{highlight:selected.includes(card)}"
+					@select="select(card)"
+					v-bind:key="card.name"
+					v-bind:name="card.name"
+					v-bind:description="card.description"
+					v-bind:category="card.category"
+					v-bind:points="card.points"
+				/>
+			</div>
 			<div class="stripe flex-center">
-				
+				<div class="form-actions">
+					<button type="submit" id="submit-cards-btn" class="btn primary" :disabled="selected.length < 5">Submit</button>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -35,6 +50,7 @@ const Layer = require('./layer');
 const RelativePoint = require('../../common/relative-point');
 const GAME_PHASE = require('../../common/game-phase');
 const CONNECTION_STATE = require('./connection-state');
+import Card from './card';
 import ConnectionOverlay from './connection-overlay';
 import GameMenu from './game-menu';
 import PlayerStatuses from './player-statuses';
@@ -99,6 +115,7 @@ export default {
 		GameMenu,
 		PlayerStatuses,
 		Confirmation,
+		Card
 	},
 	props: {
 		gameConnection: {
@@ -112,8 +129,9 @@ export default {
 	},
 	data() {
 		return {
+			selected: [],
 			canvasState: CanvasState.SPECTATE,
-			stroke: strokeTracker,
+			//cards: this.gameState.cards,
 			drawingPad: drawingPad,
 			promptVisible: true,
 			skipRoundConfirmationDialogVisible: false,
@@ -129,12 +147,6 @@ export default {
 					text: 'break1',
 					hr: true,
 				}, {
-				// 	text: 'Rules',
-				// 	action: this.rules,
-				// }, {
-				// 	text: 'break2',
-				// 	hr: true,
-				// }, {
 					text: 'Skip this round',
 					action: this.showSkipRoundConfirmationDialog,
 				}, {
@@ -166,6 +178,10 @@ export default {
 		},
 		roundAndTurn() {
 			return this.gameState.round + '-' + this.gameState.turn;
+		},
+		playerCards() {
+			let idx = this.gameState.users.findIndex(user => user.name === Store.state.username);
+			return this.gameState.cards.slice(idx * 10, idx * 10 + 10);
 		}
 	},
 	watch: {
@@ -177,6 +193,15 @@ export default {
 		},
 	},
 	methods: {
+		select: function(card) {
+			if (this.selected.includes(card)) {
+				this.selected.splice(this.selected.indexOf(card), 1)
+			} else {
+				if (this.selected.length < 5) {
+					this.selected.push(card);
+				}
+			}
+		},
 		reset() {
 			if(this.gameState.turn === 1) {
 				drawingPad.clearLayer(Layer.BOTTOM);
