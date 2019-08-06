@@ -96,11 +96,15 @@ const MessageHandlers = {
 		joinTeam(user, room, team);
 		broadcastRoomState(io, room, MESSAGE.JOIN_TEAM);
 	},
-
+	[MESSAGE.CARD_SELECT](io, sock, data) {
+		GamePrecond.allPlayersInTeam(sock.user.gameRoom);
+		let rm = sock.user.gameRoom;
+		rm.startCardSelect();
+		broadcastRoomState(io, rm, MESSAGE.CARD_SELECT);
+	},
 	[MESSAGE.START_GAME](io, sock, data) {
 		GamePrecond.sockHasUser(sock);
 		GamePrecond.userIsInARoom(sock.user);
-		GamePrecond.allPlayersInTeam(sock.user.gameRoom);
 		let rm = sock.user.gameRoom;
 		rm.startNewRound();
 		broadcastRoomState(io, rm, MESSAGE.START_GAME);

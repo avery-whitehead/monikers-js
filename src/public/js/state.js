@@ -43,6 +43,8 @@ const Store = {
 
 		if(this.state.gameState.phase === GAME_PHASE.SETUP) {
 			this.setView(VIEW.SETUP);
+		} else if (this.state.gameState.phase === GAME_PHASE.SELECT) {
+			this.setView(VIEW.SELECT);
 		} else if(this.state.gameState.phase === GAME_PHASE.PLAY || this.state.gameState.phase === GAME_PHASE.VOTE) {
 			this.setView(VIEW.GAME);
 		}
@@ -62,6 +64,7 @@ const Store = {
 	submitJoinGame,
 	submitLeaveGame,
 	submitJoinTeam,
+	submitCardSelect,
 	submitStartGame,
 	submitStroke,
 	submitSkipRound,
@@ -121,6 +124,7 @@ handleSocket(MESSAGE.LEAVE_ROOM, function(data) {
 });
 handleSocket(MESSAGE.USER_LEFT);
 handleSocket(MESSAGE.START_GAME);
+handleSocket(MESSAGE.CARD_SELECT);
 handleSocket(MESSAGE.NEW_TURN);
 handleSocket(MESSAGE.RETURN_TO_SETUP);
 
@@ -160,6 +164,9 @@ function submitJoinTeam(team) {
 		team: team,
 	});
 }
+function submitCardSelect() {
+	socket.emit(MESSAGE.CARD_SELECT, {});
+}
 function submitStartGame() {
 	socket.emit(MESSAGE.START_GAME, {});
 }
@@ -185,6 +192,7 @@ socket.on('disconnect', function() {
 				// No need to handle reconnection, user should just join the room normally again
 				Store.setGameState(undefined);
 				break;
+			case GAME_PHASE.SELECT:
 			case GAME_PHASE.PLAY:
 			case GAME_PHASE.VOTE:
 				let me = existingGameState.findUser(Store.state.username);

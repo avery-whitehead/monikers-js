@@ -85,6 +85,11 @@ class GameRoom {
 	findUser(name) {
 		return this.users.find((p) => (p.name === name));
 	}
+	startCardSelect() {
+		this.phase = GAME_PHASE.SELECT;
+		this.cards = _.sampleSize(cardsJson, this.users.length * 10);
+		console.log(`Started card select in Room-${this.roomCode}`);
+	}
 	startNewRound() {
 		this.round++;
 		this.shuffleUsers();
@@ -95,7 +100,6 @@ class GameRoom {
 		this.hint = prompt.hint;
 		this.faker = Util.randomItemFrom(this.users);
 		this.strokes = [];
-		this.cards = _.sampleSize(cardsJson, this.users.length * 10);
 		console.log(`New round: Room-${this.roomCode} start round ${this.round}`);
 	}
 	invokeSetup() {
@@ -133,7 +137,7 @@ class GameRoom {
 		return undefined;
 	}
 	gameInProgress() {
-		return this.phase === GAME_PHASE.PLAY || this.phase === GAME_PHASE.VOTE;
+		return this.phase === GAME_PHASE.PLAY || this.phase === GAME_PHASE.VOTE || this.phase === GAME_PHASE.SELECT;
 	}
 	isFull() {
 		return this.users.length >= MAX_USERS;

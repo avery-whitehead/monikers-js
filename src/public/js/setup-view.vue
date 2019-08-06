@@ -87,7 +87,7 @@ export default {
 	},
 	methods: {
 		start() {
-			Store.submitStartGame();
+			Store.submitCardSelect();
 		},
 		leave() {
 			Store.setView(VIEW.HOME);
