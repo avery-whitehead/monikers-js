@@ -57,12 +57,6 @@ SCHEMA[MESSAGE.START_GAME] = {
 	},
 	required: [],
 };
-SCHEMA[MESSAGE.CARD_SELECT] = {
-	$id: MESSAGE.CARD_SELECT,
-	properties: {
-	},
-	required: []
-};
 SCHEMA[MESSAGE.SUBMIT_STROKE] = {
 	$id: MESSAGE.SUBMIT_STROKE,
 	properties: {

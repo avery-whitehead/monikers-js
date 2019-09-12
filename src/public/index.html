@@ -40,7 +40,6 @@
 			</div>
 			<rules-view v-if="state.view === 'rules'"></rules-view>
 			<setup-view v-if="state.view === 'setup'" :room-code="state.gameState === undefined ? undefined : state.gameState.roomCode" :usernames="usernames" :reds="reds" :blues="blues"></setup-view>
-			<select-view v-if="state.view === 'select'" :game-state="state.gameState" :game-connection="state.gameConnection"></select-view>
 			<game-view v-if="state.view === 'game'" :game-state="state.gameState" :game-connection="state.gameConnection"></game-view>
 		</div>
 		<script src="./js/index.js" crossorigin></script>

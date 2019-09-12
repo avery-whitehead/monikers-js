@@ -1,7 +1,7 @@
 const VIEW = {
 	'HOME': 'home',
 	'SETUP': 'setup',
-	'SELECT': 'select',
+	'CARD_SELECT': 'card_select',
 	'GAME': 'game',
 	'RULES': 'rules',
 };

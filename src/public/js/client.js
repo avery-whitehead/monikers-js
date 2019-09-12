@@ -10,7 +10,6 @@ import Vue from 'vue';
 import HomeMenu from './home-menu.vue';
 import SetupView from './setup-view.vue';
 import GameView from './game-view.vue';
-import SelectView from './select-view.vue';
 import RulesView from './rules-view.vue';
 import GameMenu from './game-menu.vue';
 
@@ -20,7 +19,6 @@ const app = new Vue({
 		HomeMenu,
 		SetupView,
 		GameView,
-		SelectView,
 		GameMenu,
 		RulesView,
 	},
