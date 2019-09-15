@@ -14,6 +14,7 @@ function generateClientGameState() {
 		hint: undefined,
 		fakerName: undefined,
 		cards: [],
+		selectedCards: [],
 		redCards: [],
 		blueCards: [],
 		strokes: [],
@@ -35,6 +36,9 @@ function generateClientGameState() {
 			return this.users
 				.filter(u => u.team === 'blue')
 				.map(u => u.name);
+		},
+		getSelectedCards() {
+			return this.selectedCards;
 		},
 		adoptJson(json) {
 			return Object.assign(this, json);

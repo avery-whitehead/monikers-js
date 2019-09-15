@@ -15,7 +15,7 @@ const Store = {
 		gameState: undefined,
 		createWarning: undefined,
 		joinWarning: undefined,
-		gameConnection: CONNECTION_STATE.DISCONNECT,
+		gameConnection: CONNECTION_STATE.DISCONNECT
 	},
 	setUsername(username) {
 		this.state.username = username;
@@ -66,6 +66,7 @@ const Store = {
 	submitStroke,
 	submitSkipRound,
 	submitReturnToSetup,
+	submitCards,
 };
 
 function handleSocket(messageName, handler, errHandler) {
@@ -81,6 +82,9 @@ function handleSocket(messageName, handler, errHandler) {
 			handler(data);
 		}
 		if(data.roomState !== undefined) {
+			if (messageName === 'SUBMIT_CARDS') {
+				console.log(data.roomState);
+			}
 			Store.setGameState(data.roomState);
 		}
 	});
@@ -122,6 +126,7 @@ handleSocket(MESSAGE.LEAVE_ROOM, function(data) {
 handleSocket(MESSAGE.USER_LEFT);
 handleSocket(MESSAGE.START_GAME);
 handleSocket(MESSAGE.NEW_TURN);
+handleSocket(MESSAGE.SUBMIT_CARDS);
 handleSocket(MESSAGE.RETURN_TO_SETUP);
 
 const usernameWarning = 'Username must be 1-20 characters long, and can only contain alphanumerics and spaces';
@@ -173,6 +178,11 @@ function submitSkipRound() {
 }
 function submitReturnToSetup() {
 	socket.emit(MESSAGE.RETURN_TO_SETUP);
+}
+function submitCards(cards) {
+	socket.emit(MESSAGE.SUBMIT_CARDS, {
+		cards: cards
+	});
 }
 
 socket.on('disconnect', function() {

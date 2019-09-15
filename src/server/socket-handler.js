@@ -105,6 +105,7 @@ const MessageHandlers = {
 		rm.startNewRound();
 		broadcastRoomState(io, rm, MESSAGE.START_GAME);
 	},
+
 	[MESSAGE.SKIP_ROUND](io, sock, data) {
 		GamePrecond.sockHasUser(sock);
 		GamePrecond.userIsInARoom(sock.user);
@@ -121,8 +122,16 @@ const MessageHandlers = {
 		let rm = sock.user.gameRoom;
 		rm.addStroke(sock.user.name, data.points);
 		rm.nextTurn();
-
 		broadcastRoomState(io, rm, MESSAGE.NEW_TURN);
+	},
+
+	[MESSAGE.SUBMIT_CARDS](io, sock, data) {
+		GamePrecond.sockHasUser(sock);
+		GamePrecond.userIsInARoom(sock.user);
+		GamePrecond.gameInProgress(sock.user.gameRoom);
+		let rm = sock.user.gameRoom;
+		rm.addCards(data.cards);
+		broadcastRoomState(io, rm, MESSAGE.SUBMIT_CARDS);
 	},
 
 	[MESSAGE.RETURN_TO_SETUP](io, sock, data) {
@@ -280,36 +289,26 @@ const GamePrecond = {
 // send roomstate update to all users, accounting for different roles (i.e., faker vs artist)
 function broadcastRoomState(io, room, messageName, addtlProcessFn) {
 	let state = CliAdapter.generateStateJson(room);
-	if(addtlProcessFn) {
+	if (addtlProcessFn) {
 		state = addtlProcessFn(state);
 	}
 
-	if(room.phase === GAME_PHASE.SETUP) {
+	if (room.phase === GAME_PHASE.SETUP) {
 		io.in(room.roomCode).emit(messageName, {
 			roomState: state,
 		});
 		return;
 	}
 
-	let artistView = CliAdapter.hideFaker(state);
-	let fakerView = CliAdapter.hideKeyword(state);
-
-	for(let u of room.users) {
+	for (let u of room.users) {
 		let s = u.socket;
-		if(u.socket === undefined) {
+		if (u.socket === undefined) {
 			continue;
 		}
 
-		let res;
-		if(room.phase === GAME_PHASE.PLAY || room.phase === GAME_PHASE.VOTE) {
-			res = {
-				roomState: room.faker && room.faker.name === u.name ? fakerView : artistView,
-			};
-		} else {
-			res = {
-				roomState: state,
-			};
-		}
+		let res = {
+			roomState: state
+		};
 		s.emit(messageName, res);
 	}
 }

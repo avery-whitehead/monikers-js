@@ -4,7 +4,7 @@ const GameError = require('./game-error');
 
 const rooms = new Map();
 const ROOMS_LIMIT = 100;
-const ROOM_CODE_LENGTH = 5;
+const ROOM_CODE_LENGTH = 3;
 
 function getRoomByCode(roomCode) {
 	return rooms.get(roomCode);

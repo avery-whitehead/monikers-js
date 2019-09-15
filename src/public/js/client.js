@@ -37,6 +37,9 @@ const app = new Vue({
 		},
 		blues() {
 			return this.state.gameState && this.state.gameState.getBlues();
+		},
+		selectedCards() {
+			return this.state.gameState && this.state.gameState.getSelctedCards();
 		}
 	},
 });

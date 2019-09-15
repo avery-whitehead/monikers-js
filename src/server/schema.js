@@ -79,6 +79,34 @@ SCHEMA[MESSAGE.SUBMIT_STROKE] = {
 	},
 	required: ['points'],
 };
+SCHEMA[MESSAGE.SUBMIT_CARDS] = {
+	$id: MESSAGE.SUBMIT_CARDS,
+	properties: {
+		cards: {
+			type: 'array',
+			items: {
+				type: 'object',
+				properties: {
+					name: {
+						type: 'string'
+					},
+					description: {
+						type: 'string'
+					},
+					category: {
+						type: 'string'
+					},
+					points: {
+						type: 'integer'
+					}
+				},
+				required: ['category', 'description', 'name', 'points']
+			},
+			minItems: 5
+		}
+	},
+	required: ['cards']
+};
 
 for(let schema of Object.values(SCHEMA)) {
 	ajv.addSchema(schema, schema.$id);
