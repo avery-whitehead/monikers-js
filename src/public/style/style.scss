@@ -5,6 +5,7 @@
 	--number-font: 'Raleway', sans-serif;
 	--button-font: 'Arimo', sans-serif;
 	--card-font: 'Rubik', sans-serif;
+	--title-font: 'Maven Pro', sans-serif;
 }
 
 html, body {
@@ -281,6 +282,7 @@ div.card.highlight {
 
 div.card-title {
 	font-size: 28px;
+	font-family: var(--title-font);
 	font-weight: bold;
 	color: var(--grey7);
 	padding-bottom: 15px;
@@ -289,7 +291,7 @@ div.card-desc {
 	position: absolute;
 	color: var(--grey6);
 	font-size: 17px;
-	text-align: justify;
+	text-align: left;
 	top: 25%;
 	left: 50%;
 	-webkit-transform: translateX(-50%);
