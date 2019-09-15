@@ -1,6 +1,6 @@
 <template>
 <div id="home-menu" class="flex-center">
-    <div id="first-prompt-menu" class="menu" v-show="tab === 'main'">
+    <div id="first-prompt-menu" class="menu" v-if="tab === 'main'">
         <button id="goto-create-menu" class="btn big primary" @click="goto('create')">New Game</button>
         <div style="clear: both"></div>
         <button id="goto-join-menu" class="btn big primary" @click="goto('join')">Join Game</button>
@@ -8,8 +8,8 @@
         <button class="btn big secondary" @click="gotoRules()">Rules</button>
     </div>
 
-    <div id="create-game-menu" class="menu" v-show="tab === 'create'">
-        <div class="warning" v-show="createWarning !== undefined">
+    <div id="create-game-menu" class="menu" v-if="tab === 'create'">
+        <div class="warning" v-if="createWarning !== undefined">
             <p>{{createWarning}}</p>
         </div>
         <form id="create-game-form" @submit.prevent="createGame">
@@ -22,8 +22,8 @@
         </form>
     </div>
 
-    <div id="join-game-menu" class="menu" v-show="tab === 'join'">
-        <div class="warning" v-show="joinWarning !== undefined">
+    <div id="join-game-menu" class="menu" v-if="tab === 'join'">
+        <div class="warning" v-if="joinWarning !== undefined">
             <p>{{joinWarning}}</p>
         </div>
         <form id="join-game-form" @submit.prevent="joinGame">

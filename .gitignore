@@ -12,3 +12,4 @@ src/public/js/index.js
 *.js.map
 *.css.map
 style.css
+src/public/js/game-view-old.vue

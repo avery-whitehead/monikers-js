@@ -4,7 +4,7 @@
 
 		<template #actions>
 			<button class="btn tertiary" @click="$emit('close')">Cancel</button>
-			<button class="btn primary" @click="$emit('confirm')">Confirm</button>
+			<button id="leave-game-btn" class="btn primary" @click="$emit('confirm')">Confirm</button>
 		</template>
 
 	</dialog-component>

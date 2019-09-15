@@ -5,7 +5,7 @@
 				<use xlink:href="feather-sprite.svg#more-horizontal"/>
 			</svg>
 		</button>
-        <div id="game-menu-dropdown" class="dropup-content" v-show="expanded === true">
+        <div id="game-menu-dropdown" class="dropup-content" v-if="expanded === true">
             <ul class="dropup-list">
 				<div v-for="item in items" :key="item.text">
 					<li v-if="!item.hr" @click="doAction(item)">{{item.text}}</li>
