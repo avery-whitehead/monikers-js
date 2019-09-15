@@ -1,6 +1,6 @@
 <template>
 	<div id="in-game" class="view">
-		<div class="view-container">
+		<div id="select-card-menu" class="view-container" v-if="thisUser.cardsChosen === false">
 			<div class="stripe flex-center">
 				<div id="game-info" class="stripe-content align-center">
 					<p>Choose five cards you like the look of</p>
@@ -23,6 +23,17 @@
 			<div class="stripe flex-center">
 				<div class="form-actions">
 					<button type="submit" id="submit-cards-btn" class="btn primary" :disabled="selected.length < 5" @click="submit">Submit</button>
+				</div>
+			</div>
+		</div>
+		<div id="waiting-menu" class="view-container" v-if="thisUser.cardsChosen === true">
+			<div class="stripe flex-center">
+				<div class="stripe-content align-center">
+					<p>Waiting for players to select some cards</p>
+					<p>(feel free to give them a nudge)</p>
+					<ul class="users">
+						<li v-for="ncUser in notChosenUsers" :key="'0' + ncUser">{{ncUser}}</li>
+					</ul>
 				</div>
 			</div>
 		</div>
@@ -66,6 +77,17 @@ export default {
 		playerCards() {
 			let idx = this.gameState.users.findIndex(user => user.name === Store.state.username);
 			return this.gameState.cards.slice(idx * 10, idx * 10 + 10);
+		},
+		thisUser() {
+			console.log(this.gameState.users);
+			console.log(Store.state.username);
+			console.log(this.gameState.users.find(user => user.name === Store.state.username));
+			return this.gameState.users.find(user => user.name === Store.state.username);
+		},
+		notChosenUsers() {
+			return this.gameState.users
+				.filter(user => user.cardsChosen === false)
+				.map(user => user.name);
 		}
 	},
 	methods: {

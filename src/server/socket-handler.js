@@ -131,6 +131,7 @@ const MessageHandlers = {
 		GamePrecond.gameInProgress(sock.user.gameRoom);
 		let rm = sock.user.gameRoom;
 		rm.addCards(data.cards);
+		sock.user.setCardsChosen(true);
 		broadcastRoomState(io, rm, MESSAGE.SUBMIT_CARDS);
 	},
 

@@ -10,6 +10,7 @@ class User {
 		this.gameRoom = undefined;
 		this.team = undefined;
 		this.captain = false;
+		this.cardsChosen = false;
 	}
 
 	setGameRoom(gameRoom) {
@@ -20,6 +21,9 @@ class User {
 	}
 	setCaptain(captain) {
 		this.captan = captain;
+	}
+	setCardsChosen(cardsChosen) {
+		this.cardsChosen = cardsChosen;
 	}
 
 	get connected() {

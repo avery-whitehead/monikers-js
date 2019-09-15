@@ -18,7 +18,7 @@ const Store = {
 		gameConnection: CONNECTION_STATE.DISCONNECT
 	},
 	setUsername(username) {
-		this.state.username = username;
+		this.state.username = username.trim();
 	},
 	setView(view) {
 		this.state.previousView = this.state.view;
@@ -132,6 +132,7 @@ handleSocket(MESSAGE.RETURN_TO_SETUP);
 const usernameWarning = 'Username must be 1-20 characters long, and can only contain alphanumerics and spaces';
 function submitCreateGame(username) {
 	username = username.trim();
+	console.log(username);
 	if(Util.validateUsername(username)) {
 		this.setWarning('createWarning', undefined);
 		socket.emit(MESSAGE.CREATE_ROOM, {
@@ -145,6 +146,7 @@ function submitCreateGame(username) {
 }
 function submitJoinGame(roomCode, username) {
 	username = username.trim();
+	console.log(username);
 	if(Util.validateUsername(username)) {
 		this.setWarning('joinWarning', undefined);
 		socket.emit(MESSAGE.JOIN_ROOM, {
