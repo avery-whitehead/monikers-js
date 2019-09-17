@@ -10,7 +10,7 @@
 	padding: 0 15px;
 	margin: 10px 10px;
 	cursor: pointer;
-	transition: 0.35s;
+	transition: 0.15s;
 
 	&.big {
 		min-width: 220px;
@@ -33,6 +33,12 @@
 		min-width: 165px;
 		background-color: var(--blue-team);
 		border-color: var(--blue-team);
+		@media(any-hover: hover) {
+			&:hover {
+				border-color: var(--blue-team-hover);
+				background-color: var(--blue-team-hover);
+			}
+		}
 	}
 	&#join-red {
 		margin-left: auto;
@@ -40,6 +46,12 @@
 		min-width: 165px;
 		background-color: var(--red-team);
 		border-color: var(--red-team);
+		@media(any-hover: hover) {
+			&:hover {
+				border-color: var(--red-team-hover);
+				background-color: var(--red-team-hover);
+			}
+		}
 	}
 	&:disabled {
 		border-color: var(--blue0);
@@ -53,7 +65,8 @@
 		border-color: var(--blue0);
 		@media(any-hover: hover) {
 			&:hover {
-				border-radius: 40px;
+				border-color: var(--blue1);
+				background-color: var(--blue1);
 			}
 		}
 		&:active {
@@ -67,7 +80,8 @@
 		border-color: var(--blue0);
 		@media(any-hover: hover) {
 			&:hover {
-				border-radius: 40px;
+				border-color: var(--blue1);
+				color: var(--blue1);
 			}
 		}
 		&:active {

@@ -1,8 +1,5 @@
 :root {
-	--artist3: hsl(327, 100%, 55%);
-	--artist4: hsl(327, 100%, 45%);
-	--artist5: hsl(327, 100%, 35%);
-	--artist6: hsl(327, 100%, 25%);
+	--pink0: hsl(327, 100%, 45%);
 	--grey0: hsl(20, 0%, 95%);
 	--grey1: hsl(20, 0%, 90%);
 	--grey2: hsl(20, 0%, 80%);
@@ -13,11 +10,8 @@
 	--grey7: hsl(20, 0%, 30%);
 	--grey8: hsl(20, 0%, 20%);
 	--blue0: hsl(192, 100%, 50%);
-	--blue1: hsl(200, 60%, 75%);
-	--blue2: hsl(200, 60%, 60%);
-	--blue3: hsl(200, 60%, 45%);
-	--blue4: hsl(200, 60%, 40%);
-	--blue5: hsl(200, 60%, 30%);
+	--blue1: hsl(192, 100%, 65%);
+	--blue2: hsl(200, 60%, 40%);
 	--green1: rgb(66, 190, 160);
 	--gold1: hsl(54, 100%, 90%);
 	--gold2: hsl(54, 100%, 70%);
@@ -28,8 +22,10 @@
 	--purp2: hsl(258, 50%, 75%);
 	--purp3: hsl(258, 50%, 55%);
 	--red1: rgb(240, 82, 62);
-	--red-team: rgb(214, 46, 50);
-	--blue-team: rgb(48, 63, 95);
+	--red-team: hsl(359, 67%, 50%);
+	--red-team-hover: hsl(359, 67%, 65%);
+	--blue-team: hsl(221, 33%, 30%);
+	--blue-team-hover: hsl(221, 33%, 45%);
 	--shade: rgba(0, 0, 0, 0.3);
 	--shade1: rgba(0, 0, 0, 0.7);
 }
