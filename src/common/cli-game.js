@@ -4,8 +4,6 @@ function generateClientGameState() {
 	return {
 		roomCode: undefined,
 		users: [],
-		reds: [],
-		blues: [],
 		round: undefined,
 		phase: undefined,
 		turn: undefined,
@@ -46,14 +44,6 @@ function generateClientGameState() {
 		getUserColor(username) {
 			let userIdx = _.findIndex(this.getUsernames(), (u) => (u === username)); // needs es6 polyfill
 			return userIdx >= 0 ? COLOR.HEX[COLOR.ORDER[userIdx]] || 'var(--grey6)' : 'var(--grey6)';
-		},
-		getUserTeam(username) {
-			if (this.reds.includes(username)) {
-				return 'red';
-			} else if (this.blues.includes(username)) {
-				return 'blue';
-			}
-			return undefined;
 		},
 		getMostRecentStroke() {
 			return this.strokes[this.strokes.length - 1];

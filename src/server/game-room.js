@@ -12,8 +12,6 @@ class GameRoom {
 	constructor(roomCode, host) {
 		this.roomCode = roomCode;
 		this.users = [];
-		this.reds = [];
-		this.blues = [];
 		this.host = host;
 
 		this.round = 0;
@@ -49,38 +47,9 @@ class GameRoom {
 			throw new GameError(`Could not readd ${user.logName}. Existing user target DNE.`, 'Could not rejoin');
 		}
 	}
-	addTeam(user, team) {
-		if (team === 'red') {
-			// If user doesn't already exist in a team
-			if (!(this.reds.find((u) => (u.name === user.name)))) {
-				this.reds.push(user);
-				// If user exists in another team
-				if (this.blues.find((u) => (u.name === user.name))) {
-					let idx = this.blues.indexOf(user);
-					// Remove user from old team
-					this.blues.splice(idx, 1);
-				}
-				return this.reds.length;
-			}
-		} else if (team === 'blue') {
-			if (!this.blues.find((u) => (u.name === user.name))) {
-				this.blues.push(user);
-				if (this.reds.find((u) => (u.name === user.name))) {
-					let idx = this.reds.indexOf(user);
-					this.reds.splice(idx, 1);
-				}
-				return this.blues.length;
-			}
-		}
-		return false;
-	}
 	dropUser(user) {
 		let uIdx = this.users.indexOf(user);
 		this.users.splice(uIdx, 1);
-		let rIdx = this.reds.indexOf(user);
-		this.reds.splice(rIdx, 1);
-		let bIdx = this.blues.indexOf(user);
-		this.blues.splice(bIdx, 1);
 		return this.users.length;
 	}
 	findUser(name) {
@@ -97,6 +66,7 @@ class GameRoom {
 		this.faker = Util.randomItemFrom(this.users);
 		this.strokes = [];
 		this.cards = _.sampleSize(cardsJson, this.users.length * 10);
+		this.users[0].captain = true;
 		console.log(`New round: Room-${this.roomCode} start round ${this.round}`);
 	}
 	invokeSetup() {
@@ -143,7 +113,7 @@ class GameRoom {
 		return this.users.length >= MAX_USERS;
 	}
 	hasUnassignedPlayers() {
-		return (this.reds.length + this.blues.length) != this.users.length;
+		return this.users.some(user => user.team === undefined);
 	}
 	isDead() {
 		// all users are disconnected
@@ -159,19 +129,8 @@ const ClientAdapter = {
 				name: u.name,
 				connected: u.connected,
 				team: u.team,
-				cardsChosen: u.cardsChosen
-			})),
-			reds: _.map(gameRoom.reds, (u) => ({
-				name: u.name,
-				connected: u.connected,
-				team: u.team,
-				cardsChosen: u.cardsChosen
-			})),
-			blues: _.map(gameRoom.blues, (u) => ({
-				name: u.name,
-				connected: u.connected,
-				team: u.team,
-				cardsChosen: u.cardsChosen
+				cardsChosen: u.cardsChosen,
+				captain: u.captain
 			})),
 			cards: gameRoom.cards,
 			selectedCards: gameRoom.selectedCards,

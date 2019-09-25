@@ -211,10 +211,8 @@ function joinRoom(user, room, rejoin, isHost = false) {
 }
 
 function joinTeam(user, room, team) {
-	if(room.addTeam(user, team)) {
-		console.log(`${user.logName} joined team ${team} in room-${room.roomCode}`);
-		user.setTeam(team);
-	}
+	user.setTeam(team);
+	console.log(`${user.logName} joined team ${team} in room-${room.roomCode}`);
 	return user;
 }
 
