@@ -26,7 +26,7 @@
 				</div>
 			</div>
 		</div>
-		<div id="waiting-menu" class="view-container" v-if="thisUser.cardsChosen === true && !allUsersSubmitted">
+		<div id="waiting-menu" v-if="thisUser.cardsChosen === true && !allUsersSubmitted">
 			<div class="stripe flex-center">
 				<div class="stripe-content align-center">
 					<p>Waiting for other players to select their cards</p>
@@ -37,8 +37,30 @@
 				</div>
 			</div>
 		</div>
-		<div id="game-screen" class="view-container" v-if="allUsersSubmitted">
-			<p>game goes here</p>
+		<div class="stripe flex-center" id="game-screen" v-if="allUsersSubmitted">
+			<div class="stripe-content">
+				<p>Red team - points</p>
+				<ul>
+					<li v-for="red in this.gameState.users.filter(u => u.team === 'red')" :key="'0' + red">{{red.name}}</li>
+				</ul>
+			</div>
+			<div class="stripe stripe-content">
+				<card
+					class="stripe-content card"
+					v-bind:key="this.gameState.selectedCards[cardIdx].name"
+					v-bind:name="this.gameState.selectedCards[cardIdx].name"
+					v-bind:description="this.gameState.selectedCards[cardIdx].description"
+					v-bind:category="this.gameState.selectedCards[cardIdx].category"
+					v-bind:points="this.gameState.selectedCards[cardIdx].points"
+				/>
+				<button type="submit" id="next-card-btn" class="btn primary" @click="cardIdx++">Next Card</button>
+			</div>
+			<div class="stripe-content">
+				<p>Blue team - points</p>
+				<ul>
+					<li v-for="blue in this.gameState.users.filter(u => u.team === 'blue')" :key="'0' + blue">{{blue.name}}</li>
+				</ul>
+			</div>
 		</div>
 	</div>
 </template>
@@ -68,7 +90,8 @@ export default {
 	},
 	data() {
 		return {
-			selected: []
+			selected: [],
+			cardIdx: 0
 		}
 	},
 	computed: {
