@@ -26,7 +26,7 @@
 				</div>
 			</div>
 		</div>
-		<div id="waiting-menu" class="view-container" v-if="thisUser.cardsChosen === true">
+		<div id="waiting-menu" class="view-container" v-if="thisUser.cardsChosen === true && !allUsersSubmitted">
 			<div class="stripe flex-center">
 				<div class="stripe-content align-center">
 					<p>Waiting for players to select some cards</p>
@@ -38,7 +38,7 @@
 			</div>
 		</div>
 		<div id="game-screen" class="view-container" v-if="allUsersSubmitted">
-			<p>omg</p>
+			<p>game goes here</p>
 		</div>
 	</div>
 </template>

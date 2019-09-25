@@ -21,6 +21,4 @@ Go to `localhost:3000`
 
 ### Todo:
 
-* Rotate captains
-* Extract card select screen to different view
-* The entire game, I guess?
+* Ingame views
