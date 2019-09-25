@@ -11,7 +11,7 @@
 				<card
 					v-for="card in playerCards"
 					class="card-small"
-					:class="{highlight:selected.includes(card)}"
+					:class="{highlight:selected.some(c => c.name === card.name)}"
 					@select="select(card)"
 					v-bind:key="card.name"
 					v-bind:name="card.name"
@@ -36,6 +36,9 @@
 					</ul>
 				</div>
 			</div>
+		</div>
+		<div id="game-screen" class="view-container" v-if="allUsersSubmitted">
+			<p>omg</p>
 		</div>
 	</div>
 </template>
@@ -79,33 +82,38 @@ export default {
 			return this.gameState.cards.slice(idx * 10, idx * 10 + 10);
 		},
 		thisUser() {
-			console.log(this.gameState.users);
-			console.log(Store.state.username);
-			console.log(this.gameState.users.find(user => user.name === Store.state.username));
 			return this.gameState.users.find(user => user.name === Store.state.username);
 		},
 		notChosenUsers() {
 			return this.gameState.users
 				.filter(user => user.cardsChosen === false)
 				.map(user => user.name);
+		},
+		allUsersSubmitted() {
+			return this.gameState.users
+				.every(user => user.cardsChosen === true);
 		}
 	},
 	methods: {
 		select(card) {
-			if (this.selected.includes(card)) {
-				this.selected.splice(this.selected.indexOf(card), 1)
+			console.log(card.name);
+			if (this.selected.some(c => c.name === card.name)) {
+				this.selected = this.selected.filter(c => c.name !== card.name);
 			} else {
 				if (this.selected.length < 5) {
 					this.selected.push(card);
 				}
 			}
 		},
-		reset() {
-			console.log('reset');
-		},
 		submit() {
 			Store.submitCards(this.selected);
 		}
 	},
+	updated() {
+		console.log(this.selected);
+	},
+	beforeDestroy() {
+		console.log('destroyed');
+	}
 };
 </script>
