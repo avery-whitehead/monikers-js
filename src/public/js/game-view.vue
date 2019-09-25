@@ -29,9 +29,9 @@
 		<div id="waiting-menu" class="view-container" v-if="thisUser.cardsChosen === true && !allUsersSubmitted">
 			<div class="stripe flex-center">
 				<div class="stripe-content align-center">
-					<p>Waiting for players to select some cards</p>
+					<p>Waiting for other players to select their cards</p>
 					<p>(feel free to give them a nudge)</p>
-					<ul class="users">
+					<ul class="users" style="font-weight: bold">
 						<li v-for="ncUser in notChosenUsers" :key="'0' + ncUser">{{ncUser}}</li>
 					</ul>
 				</div>
@@ -96,7 +96,6 @@ export default {
 	},
 	methods: {
 		select(card) {
-			console.log(card.name);
 			if (this.selected.some(c => c.name === card.name)) {
 				this.selected = this.selected.filter(c => c.name !== card.name);
 			} else {
@@ -108,12 +107,6 @@ export default {
 		submit() {
 			Store.submitCards(this.selected);
 		}
-	},
-	updated() {
-		console.log(this.selected);
-	},
-	beforeDestroy() {
-		console.log('destroyed');
 	}
 };
 </script>
