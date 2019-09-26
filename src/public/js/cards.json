@@ -66,7 +66,7 @@
 },
 {
     "name": "Bob Fosse",
-    "description": "A dancer and choreographer: who created musicals like All That Jazz and Cabaret. His style included turned-in knees, bowler hats, canes, and copious use of jazz hands-a technique where the performer's hands are shown palms open to the audience with fingers splayed wide.",
+    "description": "A dancer and choreographer who created musicals like All That Jazz and Cabaret. His style included turned-in knees, bowler hats, canes, and copious use of jazz hands - a technique where the performer's hands are shown palms open to the audience with fingers splayed wide.",
     "category": "HISTORICAL FIGURE",
     "points": 3
 },
@@ -125,12 +125,6 @@
     "points": 2
 },
 {
-    "name": "Hitler's Brain",
-    "description": "A trope first featured in a 60's sci-fi film, where Nazi scientists remove this organ from the Führer’s head and hide it in the fictional South American country of Mandoras. The film currently holds an approval rating of 0% on the metareview site Rotten Tomatoes.",
-    "category": "ET CETERA",
-    "points": 2
-},
-{
     "name": "Che Guevara",
     "description": "A Marxist leader in the Cuban Revolution, whose rebellious image has been commodified on T-shirts worldwide. The image, a high contrast version of the Guerrillero Heroico photograph by Alberto Korda, depicts him with mustache, beret, and implacable expression.",
     "category": "HISTORICAL FIGURE",
@@ -149,7 +143,7 @@
     "points": 4
 },
 {
-    "name": "A Valociraptor",
+    "name": "A Velociraptor",
     "description": "A bipedal. feathered carnivore from the Cretaceous Period. It is one of the most well-known dinosaurs due to its prominent role in the 1993 film Jurassic Park, where it was depicted inaccurately as large and feather-less, but quite acccurately as a clever girl.",
     "category": "ET CETERA",
     "points": 2
@@ -159,12 +153,6 @@
     "description": "A science fiction author and the founder of Scientology. The religion derives from his self-help program Dianetics, which he modestly described as \"a milestone for man comparable to his discovery of fire and superior to his invention of the wheel and the arch.\"",
     "category": "HISTORICAL FIGURE",
     "points": 2
-},
-{
-    "name": "Shirtless Vladimir Putin",
-    "description": "Former KGB officer and current President of Russia. Under his rule, Russia has grown increasingly undemocratic. He cultivates a rugged image in state media, being shown riding haIf-dressed on horseback and \"discovering\" two Ancient Greek urns in the Black Sea.",
-    "category": "CELEBRITY",
-    "points": 3
 },
 {
     "name": "Jackson Pollock",

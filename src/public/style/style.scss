@@ -394,8 +394,45 @@ canvas#new-paint {
 #waiting-menu {
 	margin: auto 0;
 }
+
 #game-screen {
 	margin: auto 0;
+
+	#red-team {
+		font-family: var(--card-font);
+		p {
+			color: var(--red-team);
+			font-weight: bold;
+			font-size: 22px;
+		}
+		li {
+			color: var(--grey6);
+			font-size: 18px;
+			margin-right: 23px;
+		}
+		.crown {
+			float: left;
+			margin-right: 7px;
+		}
+	}
+
+	#blue-team {
+		font-family: var(--card-font);
+		p {
+			color: var(--blue-team);
+			font-weight: bold;
+			font-size: 22px;
+		}
+		li {
+			color: var(--grey6);
+			font-size: 18px;
+			margin-left: 23px;
+		}
+		.crown {
+			float: right;
+			margin-left: 6px;
+		}
+	}
 }
 
 .canvas-aligned {

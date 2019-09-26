@@ -38,10 +38,12 @@
 			</div>
 		</div>
 		<div class="stripe flex-center" id="game-screen" v-if="allUsersSubmitted">
-			<div class="stripe-content">
-				<p>Red team - points</p>
+			<div class="stripe-content" id="red-team">
+				<p>RED TEAM</p>
 				<ul>
-					<li v-for="red in this.gameState.users.filter(u => u.team === 'red')" :key="'0' + red">{{red.name}}</li>
+					<li v-for="red in redTeam" :key="'0' + red">
+						<span class="crown" :style="{visibility: red.captain ? 'visible' : 'hidden'}">👑</span>{{red.name}}
+					</li>
 				</ul>
 			</div>
 			<div class="stripe stripe-content">
@@ -55,10 +57,12 @@
 				/>
 				<button type="submit" id="next-card-btn" class="btn primary" @click="cardIdx++">Next Card</button>
 			</div>
-			<div class="stripe-content">
-				<p>Blue team - points</p>
+			<div class="stripe-content" id="blue-team">
+				<p>BLUE TEAM</p>
 				<ul>
-					<li v-for="blue in this.gameState.users.filter(u => u.team === 'blue')" :key="'0' + blue">{{blue.name}}</li>
+					<li v-for="blue in blueTeam" :key="'0' + blue">
+						{{blue.name}}<span class="crown" :style="{visibility: blue.captain ? 'visible' : 'hidden'}">👑</span>
+					</li>
 				</ul>
 			</div>
 		</div>
@@ -113,8 +117,13 @@ export default {
 				.map(user => user.name);
 		},
 		allUsersSubmitted() {
-			return this.gameState.users
-				.every(user => user.cardsChosen === true);
+			return this.gameState.users.every(user => user.cardsChosen === true);
+		},
+		blueTeam() {
+			return this.gameState.users.filter(u => u.team === 'blue');
+		},
+		redTeam() {
+			return this.gameState.users.filter(u => u.team === 'red');
 		}
 	},
 	methods: {
