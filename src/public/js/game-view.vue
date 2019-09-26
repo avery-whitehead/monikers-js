@@ -11,7 +11,7 @@
 				<card
 					v-for="card in playerCards"
 					class="card-small"
-					:class="{highlight:selected.some(c => c.name === card.name)}"
+					:class="{highlight: selected.some(c => c.name === card.name)}"
 					@select="select(card)"
 					v-bind:key="card.name"
 					v-bind:name="card.name"
@@ -48,12 +48,23 @@
 			</div>
 			<div class="stripe stripe-content">
 				<card
+					v-if="thisUser.captain"
 					class="stripe-content card"
 					v-bind:key="this.gameState.selectedCards[cardIdx].name"
 					v-bind:name="this.gameState.selectedCards[cardIdx].name"
 					v-bind:description="this.gameState.selectedCards[cardIdx].description"
 					v-bind:category="this.gameState.selectedCards[cardIdx].category"
 					v-bind:points="this.gameState.selectedCards[cardIdx].points"
+				/>
+				<card
+					v-if="!thisUser.captain"
+					class="stripe-content card"
+					:class="{'blank-card': !thisUser.captain}"
+					v-bind:key="_"
+					v-bind:name="MONIKERS"
+					v-bind:description="_"
+					v-bind:category="_"
+					v-bind:points="_"
 				/>
 				<button type="submit" id="next-card-btn" class="btn primary" @click="cardIdx++">Next Card</button>
 			</div>

@@ -40,9 +40,14 @@ export default {
             } else if (this.points === 4) {
                 return "points-four-p";
             }
-        }
+        },
     },
     methods: {
+    },
+    created() {
+        if (this.name === undefined) {
+            this.name = "MONIKERS";
+        }
     }
 }
 </script>
