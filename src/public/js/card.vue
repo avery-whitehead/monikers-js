@@ -43,11 +43,6 @@ export default {
         },
     },
     methods: {
-    },
-    created() {
-        if (this.name === undefined) {
-            this.name = "MONIKERS";
-        }
     }
 }
 </script>

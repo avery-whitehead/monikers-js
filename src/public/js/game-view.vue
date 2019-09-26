@@ -60,13 +60,16 @@
 					v-if="!thisUser.captain"
 					class="stripe-content card"
 					:class="{'blank-card': !thisUser.captain}"
-					v-bind:key="_"
-					v-bind:name="MONIKERS"
-					v-bind:description="_"
-					v-bind:category="_"
-					v-bind:points="_"
+					key="_"
+					name="MONIKERS"
+					description="_"
+					category="_"
+					points="_"
 				/>
-				<button type="submit" id="next-card-btn" class="btn primary" @click="cardIdx++">Next Card</button>
+				<div class="stripe stripe-content">
+					<button v-if="thisUser.captain" type="submit" id="next-card-btn" class="btn primary" @click="cardIdx++">Correct!</button>
+					<button v-if="thisUser.captain" type="submit" id="next-card-btn" class="btn secondary" @click="cardIdx++">Skip Card</button>
+				</div>
 			</div>
 			<div class="stripe-content" id="blue-team">
 				<p>BLUE TEAM</p>
