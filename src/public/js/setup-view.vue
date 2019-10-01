@@ -43,6 +43,9 @@
 		</div>
 		<div class="stripe flex-center align-center actions">
 			<div class="stripe-content">
+				<div class="warning" v-if="startWarning !== undefined">
+            		<p>{{startWarning}}</p>
+        		</div>
 				<div class="tinytext tip" style="margin-bottom: 10px;">
 					Players won't be able to join a game in progress
 				</div>
@@ -65,6 +68,9 @@ export default {
 		Confirmation,
 	},
 	props: {
+		startWarning: {
+			type: String,
+		},
 		roomCode: {
 			type: String,
 		},
@@ -87,7 +93,7 @@ export default {
 	},
 	methods: {
 		start() {
-			Store.submitStartGame();
+			Store.submitStartGame(this.reds, this.blues, this.usernames);
 		},
 		leave() {
 			Store.setView(VIEW.HOME);

@@ -15,6 +15,7 @@ const Store = {
 		gameState: undefined,
 		createWarning: undefined,
 		joinWarning: undefined,
+		startWarning: undefined,
 		gameConnection: CONNECTION_STATE.DISCONNECT
 	},
 	setUsername(username) {
@@ -126,7 +127,11 @@ handleSocket(MESSAGE.LEAVE_ROOM, function(data) {
 	// Store.setGameState(undefined);
 });
 handleSocket(MESSAGE.USER_LEFT);
-handleSocket(MESSAGE.START_GAME);
+handleSocket(MESSAGE.START_GAME,
+	function(errMsg) {
+		Store.setWarning('startWarning', errMsg);
+	}
+);
 handleSocket(MESSAGE.NEW_TURN);
 handleSocket(MESSAGE.SUBMIT_CARDS);
 handleSocket(MESSAGE.RETURN_TO_SETUP);
@@ -169,8 +174,14 @@ function submitJoinTeam(team) {
 		team: team,
 	});
 }
-function submitStartGame() {
-	socket.emit(MESSAGE.START_GAME, {});
+function submitStartGame(reds, blues, users) {
+	if (reds.length - blues.length >= 2) {
+		this.setWarning('startWarning', 'Red team has too many members');
+	} else if (blues.length - reds.length >= 2) {
+		this.setWarning('startWarning', 'Blue team has too many members');
+	} else {
+		socket.emit(MESSAGE.START_GAME, {});
+	}
 }
 function submitStroke(points) {
 	socket.emit(MESSAGE.SUBMIT_STROKE, {
