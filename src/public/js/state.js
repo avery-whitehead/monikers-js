@@ -58,6 +58,9 @@ const Store = {
 	setWarning(warningName, message) {
 		this.state[warningName] = message;
 	},
+	getSocket() {
+		return socket;
+	},
 	submitCreateGame,
 	submitJoinGame,
 	submitLeaveGame,
@@ -67,6 +70,8 @@ const Store = {
 	submitSkipRound,
 	submitReturnToSetup,
 	submitCards,
+	submitTurnStart,
+	submitTurnEnd
 };
 
 function handleSocket(messageName, handler, errHandler) {
@@ -125,6 +130,8 @@ handleSocket(MESSAGE.START_GAME);
 handleSocket(MESSAGE.NEW_TURN);
 handleSocket(MESSAGE.SUBMIT_CARDS);
 handleSocket(MESSAGE.RETURN_TO_SETUP);
+handleSocket(MESSAGE.TURN_START);
+handleSocket(MESSAGE.TURN_END);
 
 const usernameWarning = 'Username must be 1-20 characters long, and can only contain alphanumerics and spaces';
 function submitCreateGame(username) {
@@ -179,6 +186,14 @@ function submitReturnToSetup() {
 function submitCards(cards) {
 	socket.emit(MESSAGE.SUBMIT_CARDS, {
 		cards: cards
+	});
+}
+function submitTurnStart() {
+	socket.emit(MESSAGE.TURN_START, {});
+}
+function submitTurnEnd(cardIdx) {
+	socket.emit(MESSAGE.TURN_END, {
+		cardIdx: cardIdx
 	});
 }
 

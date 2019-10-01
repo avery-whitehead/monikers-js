@@ -12,10 +12,12 @@ class GameRoom {
 	constructor(roomCode, host) {
 		this.roomCode = roomCode;
 		this.users = [];
+		this.captainIdx = 0;
 		this.host = host;
 
 		this.round = 0;
 		this.phase = GAME_PHASE.SETUP;
+		this.turnInProgress = false;
 
 		this.turn = -1;
 		this.keyword = undefined;
@@ -24,6 +26,7 @@ class GameRoom {
 
 		this.cards = [];
 		this.selectedCards = [];
+		this.cardIdx = 0;
 		this.redCards = [];
 		this.blueCards = [];
 		this.strokes = [];
@@ -66,8 +69,17 @@ class GameRoom {
 		this.faker = Util.randomItemFrom(this.users);
 		this.strokes = [];
 		this.cards = _.sampleSize(cardsJson, this.users.length * 10);
-		this.users[0].captain = true;
+		this.users[this.captainIdx].captain = true;
 		console.log(`New round: Room-${this.roomCode} start round ${this.round}`);
+	}
+	turnStart() {
+		this.turnInProgress = true;
+	}
+	turnEnd(cardIdx) {
+		this.users[this.captainIdx].captain = false;
+		this.captainIdx++;
+		this.users[this.captainIdx].captain = true;
+		this.cardIdx = cardIdx;
 	}
 	invokeSetup() {
 		console.log(`Force setup: Room-${this.roomCode}`);
@@ -134,8 +146,10 @@ const ClientAdapter = {
 			})),
 			cards: gameRoom.cards,
 			selectedCards: gameRoom.selectedCards,
+			cardIdx: gameRoom.cardIdx,
 			round: gameRoom.round,
 			phase: gameRoom.phase,
+			turnInProgress: gameRoom.turnInProgress,
 			turn: gameRoom.turn,
 			whoseTurn: gameRoom.whoseTurn() ? gameRoom.whoseTurn().name : null, // null, so the empty value still gets passed to the client
 			keyword: gameRoom.keyword,

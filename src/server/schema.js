@@ -107,6 +107,21 @@ SCHEMA[MESSAGE.SUBMIT_CARDS] = {
 	},
 	required: ['cards']
 };
+SCHEMA[MESSAGE.TURN_START] = {
+	$id: MESSAGE.TURN_START,
+	properties: {
+	},
+	required: [],
+};
+SCHEMA[MESSAGE.TURN_END] = {
+	$id: MESSAGE.TURN_END,
+	properties: {
+		cardIdx: {
+			type: 'integer'
+		}
+	},
+	required: ['cardIdx'],
+};
 
 for(let schema of Object.values(SCHEMA)) {
 	ajv.addSchema(schema, schema.$id);

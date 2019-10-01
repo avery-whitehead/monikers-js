@@ -143,6 +143,20 @@ const MessageHandlers = {
 		broadcastRoomState(io, rm, MESSAGE.RETURN_TO_SETUP);
 	},
 
+	[MESSAGE.TURN_START](io, sock, data) {
+		GamePrecond.gameInProgress(sock.user.gameRoom);
+		let rm = sock.user.gameRoom;
+		rm.turnStart();
+		broadcastRoomState(io, rm, MESSAGE.TURN_START);
+	},
+
+	[MESSAGE.TURN_END](io, sock, data) {
+		GamePrecond.gameInProgress(sock.user.gameRoom);
+		let rm = sock.user.gameRoom;
+		rm.turnEnd(data.cardIdx);
+		broadcastRoomState(io, rm, MESSAGE.TURN_END);
+	},
+
 	disconnect(io, sock, data) {
 		let user = sock.user;
 		if(user) {

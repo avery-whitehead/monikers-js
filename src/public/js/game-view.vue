@@ -47,8 +47,10 @@
 				</ul>
 			</div>
 			<div class="stripe stripe-content">
+				<div id="countdown-timer" v-if="this.gameState.turnInProgress" :style="{visibility: this.countdown >= 0 ? 'visible' : 'hidden'}">{{countdown}}</div>
+				<button v-if="thisUser.captain && !this.gameState.turnInProgress" type="submit" id="ready-btn" class="btn primary" @click="ready()">Ready?</button>
 				<card
-					v-if="thisUser.captain"
+					v-if="thisUser.captain && this.gameState.turnInProgress"
 					class="stripe-content card"
 					v-bind:key="this.gameState.selectedCards[cardIdx].name"
 					v-bind:name="this.gameState.selectedCards[cardIdx].name"
@@ -57,9 +59,9 @@
 					v-bind:points="this.gameState.selectedCards[cardIdx].points"
 				/>
 				<card
-					v-if="!thisUser.captain"
+					v-if="!thisUser.captain || (thisUser.captain && !this.gameState.turnInProgress)"
 					class="stripe-content card"
-					:class="{'blank-card': !thisUser.captain}"
+					:class="{'blank-card': !thisUser.captain || (thisUser.captain && !this.gameState.turnInProgress)}"
 					key="_"
 					name="MONIKERS"
 					description="_"
@@ -83,6 +85,7 @@
 	</div>
 </template>
 <script>
+const MESSAGE = require('../../common/message');
 const Store = require('./state');
 const VIEW = require('./view');
 const GAME_PHASE = require('../../common/game-phase');
@@ -109,7 +112,8 @@ export default {
 	data() {
 		return {
 			selected: [],
-			cardIdx: 0
+			cardIdx: 0,
+			countdown: 10
 		}
 	},
 	computed: {
@@ -152,7 +156,27 @@ export default {
 		},
 		submit() {
 			Store.submitCards(this.selected);
+		},
+		ready() {
+			Store.submitTurnStart();
+		},
+		countdownTimer() {
+			if (this.countdown >= 0) {
+				setTimeout(() => {
+					this.countdown -= 1;
+					this.countdownTimer();
+				}, 1000);
+			} else {
+				Store.submitTurnEnd(this.cardIdx);
+				this.cardIdx = this.gameState.cardIdx;
+				this.countdown = 10;
+			}
 		}
+	},
+	mounted() {
+		Store.getSocket().on(MESSAGE.TURN_START, () => {
+			this.countdownTimer();
+		});
 	}
 };
 </script>
