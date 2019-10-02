@@ -60,7 +60,7 @@ class GameRoom {
 	}
 	startNewRound() {
 		this.round++;
-		this.shuffleUsers();
+		this.users = Util.sortByTeam(this.users);
 		this.phase = GAME_PHASE.PLAY;
 		this.turn = 1;
 		let prompt = Prompts.getRandomPrompt(); // TODO ensure no duplicate prompt
@@ -97,9 +97,6 @@ class GameRoom {
 			return this.users[idx];
 		}
 		return undefined;
-	}
-	shuffleUsers() {
-		Util.shuffle(this.users);
 	}
 	addStroke(username, points) {
 		this.strokes.push(new Stroke(username, points));
