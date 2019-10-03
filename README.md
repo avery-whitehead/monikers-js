@@ -21,4 +21,5 @@ Go to `localhost:3000`
 
 ### Todo:
 
-* Ingame views
+* Handle captain assignment once end of user array is reached
+* Fix cardIdx

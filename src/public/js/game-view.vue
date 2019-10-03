@@ -167,7 +167,9 @@ export default {
 					this.countdownTimer();
 				}, 1000);
 			} else {
-				Store.submitTurnEnd(this.cardIdx);
+				if (this.thisUser.captain) {
+					Store.submitTurnEnd(this.cardIdx);
+				}
 				this.cardIdx = this.gameState.cardIdx;
 				this.countdown = 10;
 			}
@@ -177,6 +179,9 @@ export default {
 		Store.getSocket().on(MESSAGE.TURN_START, () => {
 			this.countdownTimer();
 		});
+	},
+	updated() {
+		this.thisUser = this.gameState.users.find(user => user.name === Store.state.username);
 	}
 };
 </script>

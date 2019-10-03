@@ -12,7 +12,6 @@ class GameRoom {
 	constructor(roomCode, host) {
 		this.roomCode = roomCode;
 		this.users = [];
-		this.captainIdx = 0;
 		this.host = host;
 
 		this.round = 0;
@@ -69,17 +68,18 @@ class GameRoom {
 		this.faker = Util.randomItemFrom(this.users);
 		this.strokes = [];
 		this.cards = _.sampleSize(cardsJson, this.users.length * 10);
-		this.users[this.captainIdx].captain = true;
+		this.users[0].captain = true;
 		console.log(`New round: Room-${this.roomCode} start round ${this.round}`);
 	}
 	turnStart() {
 		this.turnInProgress = true;
 	}
 	turnEnd(cardIdx) {
-		this.users[this.captainIdx].captain = false;
-		this.captainIdx++;
-		this.users[this.captainIdx].captain = true;
+		let captIdx = this.users.findIndex(u => u.captain === true);
+		this.users[captIdx].captain = false;
+		this.users[captIdx + 1].captain = true;
 		this.cardIdx = cardIdx;
+		this.turnInProgress = false;
 	}
 	invokeSetup() {
 		console.log(`Force setup: Room-${this.roomCode}`);
