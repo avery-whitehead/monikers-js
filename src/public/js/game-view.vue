@@ -52,11 +52,11 @@
 				<card
 					v-if="thisUser.captain && this.gameState.turnInProgress"
 					class="stripe-content card"
-					v-bind:key="this.gameState.selectedCards[cardIdx].name"
-					v-bind:name="this.gameState.selectedCards[cardIdx].name"
-					v-bind:description="this.gameState.selectedCards[cardIdx].description"
-					v-bind:category="this.gameState.selectedCards[cardIdx].category"
-					v-bind:points="this.gameState.selectedCards[cardIdx].points"
+					v-bind:key="this.gameState.playableCards[this.gameState.cardIdx].name"
+					v-bind:name="this.gameState.playableCards[this.gameState.cardIdx].name"
+					v-bind:description="this.gameState.playableCards[this.gameState.cardIdx].description"
+					v-bind:category="this.gameState.playableCards[this.gameState.cardIdx].category"
+					v-bind:points="this.gameState.playableCards[this.gameState.cardIdx].points"
 				/>
 				<card
 					v-if="!thisUser.captain || (thisUser.captain && !this.gameState.turnInProgress)"
@@ -69,8 +69,8 @@
 					points="_"
 				/>
 				<div class="stripe stripe-content">
-					<button v-if="thisUser.captain" type="submit" id="next-card-btn" class="btn primary" @click="cardIdx++">Correct!</button>
-					<button v-if="thisUser.captain" type="submit" id="next-card-btn" class="btn secondary" @click="cardIdx++">Skip Card</button>
+					<button v-if="thisUser.captain" type="submit" id="next-card-btn" class="btn primary" @click="nextCard(true)">Correct!</button>
+					<button v-if="thisUser.captain" type="submit" id="next-card-btn" class="btn secondary" @click="nextCard(false)">Skip Card</button>
 				</div>
 			</div>
 			<div class="stripe-content" id="blue-team">
@@ -112,8 +112,7 @@ export default {
 	data() {
 		return {
 			selected: [],
-			cardIdx: 0,
-			countdown: 10
+			countdown: 3
 		}
 	},
 	computed: {
@@ -159,6 +158,9 @@ export default {
 		},
 		ready() {
 			Store.submitTurnStart();
+			console.log(this.gameState.selectedCards);
+			console.log(this.gameState.playableCards);
+			console.log(this.gameState.cardIdx);
 		},
 		countdownTimer() {
 			if (this.countdown >= 0) {
@@ -168,17 +170,20 @@ export default {
 				}, 1000);
 			} else {
 				if (this.thisUser.captain) {
-					Store.submitTurnEnd(this.cardIdx);
+					Store.submitTurnEnd();
 				}
-				this.cardIdx = this.gameState.cardIdx;
 				this.countdown = 10;
 			}
+		},
+		nextCard(correct) {
+			Store.submitNextCard(correct);
 		}
 	},
 	mounted() {
 		Store.getSocket().on(MESSAGE.TURN_START, () => {
 			this.countdownTimer();
 		});
+
 	},
 	updated() {
 		this.thisUser = this.gameState.users.find(user => user.name === Store.state.username);

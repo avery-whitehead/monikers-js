@@ -25,6 +25,7 @@ class GameRoom {
 
 		this.cards = [];
 		this.selectedCards = [];
+		this.playableCards = [];
 		this.cardIdx = 0;
 		this.redCards = [];
 		this.blueCards = [];
@@ -74,11 +75,31 @@ class GameRoom {
 	turnStart() {
 		this.turnInProgress = true;
 	}
-	turnEnd(cardIdx) {
+	nextCard(correct) {
+		let playingTeam = this.users.find(u => u.captain === true).team;
+		if (correct) {
+			if (playingTeam === 'red') {
+				this.redCards.push(this.selectedCards[this.cardIdx]);
+			} else if (playingTeam === 'blue') {
+				this.blueCards.push(this.selectedCards[this.cardIdx]);
+			}
+			console.log(this.playableCards.length);
+			this.playableCards = this.playableCards.filter(c => c.name !== this.selectedCards[this.cardIdx].name);
+			console.log(this.playableCards.length);
+		}
+		this.cardIdx++;
+		if (this.cardIdx >= this.playableCards.length) {
+			this.cardIdx = 0;
+		}
+	}
+	turnEnd() {
 		let captIdx = this.users.findIndex(u => u.captain === true);
 		this.users[captIdx].captain = false;
-		this.users[captIdx + 1].captain = true;
-		this.cardIdx = cardIdx;
+		if (captIdx === this.users.length - 1) {
+			this.users[0].captain = true;
+		} else {
+			this.users[captIdx + 1].captain = true;
+		}
 		this.turnInProgress = false;
 	}
 	invokeSetup() {
@@ -104,6 +125,7 @@ class GameRoom {
 	}
 	addCards(cards) {
 		this.selectedCards.push.apply(this.selectedCards, cards);
+		this.playableCards.push.apply(this.playableCards, cards);
 	}
 	nextTurn() {
 		if(this.gameInProgress()) {
@@ -143,6 +165,9 @@ const ClientAdapter = {
 			})),
 			cards: gameRoom.cards,
 			selectedCards: gameRoom.selectedCards,
+			playableCards: gameRoom.playableCards,
+			redCards: gameRoom.redCards,
+			blueCards: gameRoom.blueCards,
 			cardIdx: gameRoom.cardIdx,
 			round: gameRoom.round,
 			phase: gameRoom.phase,

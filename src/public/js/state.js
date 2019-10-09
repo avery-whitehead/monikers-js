@@ -72,6 +72,7 @@ const Store = {
 	submitReturnToSetup,
 	submitCards,
 	submitTurnStart,
+	submitNextCard,
 	submitTurnEnd
 };
 
@@ -136,6 +137,7 @@ handleSocket(MESSAGE.NEW_TURN);
 handleSocket(MESSAGE.SUBMIT_CARDS);
 handleSocket(MESSAGE.RETURN_TO_SETUP);
 handleSocket(MESSAGE.TURN_START);
+handleSocket(MESSAGE.NEXT_CARD);
 handleSocket(MESSAGE.TURN_END);
 
 const usernameWarning = 'Username must be 1-20 characters long, and can only contain alphanumerics and spaces';
@@ -202,10 +204,13 @@ function submitCards(cards) {
 function submitTurnStart() {
 	socket.emit(MESSAGE.TURN_START, {});
 }
-function submitTurnEnd(cardIdx) {
-	socket.emit(MESSAGE.TURN_END, {
-		cardIdx: cardIdx
+function submitNextCard(correct) {
+	socket.emit(MESSAGE.NEXT_CARD, {
+		correct: correct
 	});
+}
+function submitTurnEnd() {
+	socket.emit(MESSAGE.TURN_END, {});
 }
 
 socket.on('disconnect', function() {

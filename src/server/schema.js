@@ -113,14 +113,20 @@ SCHEMA[MESSAGE.TURN_START] = {
 	},
 	required: [],
 };
+SCHEMA[MESSAGE.NEXT_CARD] = {
+	$id: MESSAGE.NEXT_CARD,
+	properties: {
+		correct: {
+			type: 'boolean'
+		}
+	},
+	required: ['correct']
+};
 SCHEMA[MESSAGE.TURN_END] = {
 	$id: MESSAGE.TURN_END,
 	properties: {
-		cardIdx: {
-			type: 'integer'
-		}
 	},
-	required: ['cardIdx'],
+	required: [],
 };
 
 for(let schema of Object.values(SCHEMA)) {

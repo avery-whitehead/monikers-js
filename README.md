@@ -21,5 +21,6 @@ Go to `localhost:3000`
 
 ### Todo:
 
-* Handle captain assignment once end of user array is reached
-* Fix cardIdx
+* Fix correct cards not being removed from array
+* Add/remove more things from page depending on round and turn progress
+* Use score tracker

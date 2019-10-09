@@ -13,6 +13,7 @@ function generateClientGameState() {
 		fakerName: undefined,
 		cards: [],
 		selectedCards: [],
+		playableCards: [],
 		redCards: [],
 		blueCards: [],
 		strokes: [],
@@ -37,6 +38,9 @@ function generateClientGameState() {
 		},
 		getSelectedCards() {
 			return this.selectedCards;
+		},
+		getPlayableCards() {
+			return this.playableCards;
 		},
 		adoptJson(json) {
 			return Object.assign(this, json);

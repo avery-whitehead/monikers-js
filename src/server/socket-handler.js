@@ -150,10 +150,17 @@ const MessageHandlers = {
 		broadcastRoomState(io, rm, MESSAGE.TURN_START);
 	},
 
+	[MESSAGE.NEXT_CARD](io, sock, data) {
+		GamePrecond.gameInProgress(sock.user.gameRoom);
+		let rm = sock.user.gameRoom;
+		rm.nextCard(data.correct);
+		broadcastRoomState(io, rm, MESSAGE.NEXT_CARD);
+	},
+
 	[MESSAGE.TURN_END](io, sock, data) {
 		GamePrecond.gameInProgress(sock.user.gameRoom);
 		let rm = sock.user.gameRoom;
-		rm.turnEnd(data.cardIdx);
+		rm.turnEnd();
 		broadcastRoomState(io, rm, MESSAGE.TURN_END);
 	},
 
@@ -312,7 +319,6 @@ function broadcastRoomState(io, room, messageName, addtlProcessFn) {
 		});
 		return;
 	}
-
 	for (let u of room.users) {
 		let s = u.socket;
 		if (u.socket === undefined) {
