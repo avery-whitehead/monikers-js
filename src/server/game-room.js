@@ -1,7 +1,6 @@
 const Stroke = require('../common/stroke');
 const GAME_PHASE = require('../common/game-phase');
 const Util = require('../common/util');
-const Prompts = require('./prompts');
 const _ = require('lodash');
 const GameError = require('./game-error');
 const cardsJson = require('../public/js/cards.json');
@@ -64,7 +63,6 @@ class GameRoom {
 		this.round++;
 		this.phase = GAME_PHASE.PLAY;
 		this.turn = 1;
-		this.hint = prompt.hint;
 		this.faker = Util.randomItemFrom(this.users);
 		this.strokes = [];
 		this.users[0].captain = true;

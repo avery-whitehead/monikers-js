@@ -24,3 +24,5 @@ Go to `localhost:3000`
 * Fix correct cards not being removed from array
 * Add/remove more things from page depending on round and turn progress
 * Use score tracker
+* Add invisible elements to stop page shifting
+* Fix cards remaining

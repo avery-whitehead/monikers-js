@@ -396,6 +396,14 @@ canvas#new-paint {
 #game-screen {
 	margin: auto 0;
 
+	#team-scores {
+		margin-top: 80px;
+	}
+
+	#score-value {
+		font-family: var(--number-font);
+	}
+
 	#red-team {
 		font-family: var(--card-font);
 		p {
@@ -455,6 +463,30 @@ canvas#new-paint {
 		font-weight: bold;
 		margin-bottom: 35px;
 	}
+
+	#round-title {
+		color: var(--blue0);
+		font-size: 56px;
+	}
+
+	#round-desc {
+		font-family: var(--title-font);
+		font-size: 28px;
+		font-weight: normal;
+	}
+
+	#cards-remaining-title {
+		font-family: var(--card-font);
+		font-size: 22px;
+		font-weight: bold;
+	}
+
+	#cards-remaining-value {
+		font-family: var(--number-font);
+		font-size: 20px;
+		font-weight: bold;
+	}
+
 }
 
 .canvas-aligned {

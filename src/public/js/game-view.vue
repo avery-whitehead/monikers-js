@@ -45,15 +45,17 @@
 						<span class="crown" :style="{visibility: red.captain ? 'visible' : 'hidden'}">👑</span>{{red.name}}
 					</li>
 				</ul>
-				<p>SCORE</p>
-				<p>{{this.gameState.redCards.reduce((sum, cur) => sum + cur.points, 0)}}</p>
+				<div id="team-scores">
+					<p>SCORE</p>
+					<p id="score-value">{{this.gameState.redCards.reduce((sum, cur) => sum + cur.points, 0)}}</p>
+				</div>
 			</div>
 			<div class="stripe stripe-content">
 				<div id="round-info">
-					<p>ROUND {{this.gameState.round}}</p>
-					<p v-if="this.gameState.round === 1">Anything goes!</p>
-					<p v-if="this.gameState.round === 2">Only one word!</p>
-					<p v-if="this.gameState.round === 3">No words allowed!</p>
+					<h1 id="round-title">ROUND {{this.gameState.round}}</h1>
+					<h2 id="round-desc" v-if="this.gameState.round === 1">Anything goes!</h2>
+					<h2 id="round-desc"  v-if="this.gameState.round === 2">Only one word!</h2>
+					<h2 id="round-desc"  v-if="this.gameState.round === 3">No words allowed!</h2>
 				</div>
 				<div id="countdown-timer" v-if="this.gameState.turnInProgress" :style="{visibility: this.countdown >= 0 ? 'visible' : 'hidden'}">{{countdown}}</div>
 				<button v-if="thisUser.captain && !this.gameState.turnInProgress" type="submit" id="ready-btn" class="btn primary" @click="ready()">Ready?</button>
@@ -80,9 +82,9 @@
 					<button v-if="thisUser.captain && this.gameState.turnInProgress" type="submit" id="next-card-btn" class="btn primary" @click="nextCard(true)">Correct!</button>
 					<button v-if="thisUser.captain && this.gameState.turnInProgress" type="submit" id="next-card-btn" class="btn secondary" @click="nextCard(false)">Skip Card</button>
 				</div>
-				<div class="stripe stripe-content">
-					<p>CARDS REMAINING</p>
-					<p>{{this.gameState.selectedCards.filter(c => c.collected === false).length}}</p>
+				<div v-if="this.gameState.round > 0" class="stripe stripe-content">
+					<p id="cards-remaining-title">CARDS REMAINING</p>
+					<p id="cards-remaining-value">{{this.gameState.selectedCards.filter(c => c.collected === false).length}}</p>
 				</div>
 			</div>
 			<div class="stripe-content" id="blue-team">
@@ -92,8 +94,10 @@
 						{{blue.name}}<span class="crown" :style="{visibility: blue.captain ? 'visible' : 'hidden'}">👑</span>
 					</li>
 				</ul>
-				<p>SCORE</p>
-				<p>{{this.gameState.blueCards.reduce((sum, cur) => sum + cur.points, 0)}}</p>
+				<div class="stripe-content" id="team-scores">
+					<p>SCORE</p>
+					<p id="score-value">{{this.gameState.blueCards.reduce((sum, cur) => sum + cur.points, 0)}}</p>
+				</div>
 			</div>
 		</div>
 	</div>
