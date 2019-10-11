@@ -19,13 +19,11 @@ class GameRoom {
 		this.turnInProgress = false;
 
 		this.turn = -1;
-		this.keyword = undefined;
 		this.hint = undefined;
 		this.faker = undefined;
 
 		this.cards = [];
 		this.selectedCards = [];
-		this.playableCards = [];
 		this.cardIdx = 0;
 		this.redCards = [];
 		this.blueCards = [];
@@ -59,16 +57,16 @@ class GameRoom {
 		return this.users.find((p) => (p.name === name));
 	}
 	startNewRound() {
+		if (this.round === 0) {
+			this.cards = _.sampleSize(cardsJson, this.users.length * 10);
+			this.users = Util.sortByTeam(this.users);
+		}
 		this.round++;
-		this.users = Util.sortByTeam(this.users);
 		this.phase = GAME_PHASE.PLAY;
 		this.turn = 1;
-		let prompt = Prompts.getRandomPrompt(); // TODO ensure no duplicate prompt
-		this.keyword = prompt.keyword;
 		this.hint = prompt.hint;
 		this.faker = Util.randomItemFrom(this.users);
 		this.strokes = [];
-		this.cards = _.sampleSize(cardsJson, this.users.length * 10);
 		this.users[0].captain = true;
 		console.log(`New round: Room-${this.roomCode} start round ${this.round}`);
 	}
@@ -76,20 +74,31 @@ class GameRoom {
 		this.turnInProgress = true;
 	}
 	nextCard(correct) {
+		console.log(`Card clicked: ${this.selectedCards[this.cardIdx].name}`);
+		console.log(`${this.selectedCards[this.cardIdx].name} collected = ${correct}`);
+		console.log(`Card index before rotation: ${this.cardIdx}`);
 		let playingTeam = this.users.find(u => u.captain === true).team;
 		if (correct) {
+			this.selectedCards[this.cardIdx].collected = true;
+			if (this.selectedCards.every(c => c.collected === true)) {
+				console.log('Round over!');
+				return this.cardIdx;
+			}
 			if (playingTeam === 'red') {
 				this.redCards.push(this.selectedCards[this.cardIdx]);
 			} else if (playingTeam === 'blue') {
 				this.blueCards.push(this.selectedCards[this.cardIdx]);
 			}
-			console.log(this.playableCards.length);
-			this.playableCards = this.playableCards.filter(c => c.name !== this.selectedCards[this.cardIdx].name);
-			console.log(this.playableCards.length);
 		}
 		this.cardIdx++;
-		if (this.cardIdx >= this.playableCards.length) {
-			this.cardIdx = 0;
+		for (; this.cardIdx < this.selectedCards.length; this.cardIdx++) {
+			if (this.cardIdx === this.selectedCards.length - 1) {
+				this.cardIdx = 0;
+			}
+			if(!this.selectedCards[this.cardIdx].collected) {
+				console.log(`Card index after rotation: ${this.cardIdx}`);
+				return this.cardIdx;
+			}
 		}
 	}
 	turnEnd() {
@@ -105,12 +114,10 @@ class GameRoom {
 	invokeSetup() {
 		console.log(`Force setup: Room-${this.roomCode}`);
 		this.phase = GAME_PHASE.SETUP;
-		// Reset game state
 		this.turn = -1;
-		this.keyword = undefined;
 		this.hint = undefined;
 		this.faker = undefined;
-		this.users = this.users.filter(u => u.connected); // If anyone disconnected during the game, forget about them during setup
+		this.users = this.users.filter(u => u.connected);
 	}
 	whoseTurn() {
 		if(this.phase === GAME_PHASE.PLAY) {
@@ -125,7 +132,6 @@ class GameRoom {
 	}
 	addCards(cards) {
 		this.selectedCards.push.apply(this.selectedCards, cards);
-		this.playableCards.push.apply(this.playableCards, cards);
 	}
 	nextTurn() {
 		if(this.gameInProgress()) {
@@ -147,7 +153,6 @@ class GameRoom {
 		return this.users.some(user => user.team === undefined);
 	}
 	isDead() {
-		// all users are disconnected
 		return this.users.length === 0 || _.every(this.users, u => (!u.connected));
 	}
 }
@@ -165,7 +170,6 @@ const ClientAdapter = {
 			})),
 			cards: gameRoom.cards,
 			selectedCards: gameRoom.selectedCards,
-			playableCards: gameRoom.playableCards,
 			redCards: gameRoom.redCards,
 			blueCards: gameRoom.blueCards,
 			cardIdx: gameRoom.cardIdx,
@@ -174,7 +178,6 @@ const ClientAdapter = {
 			turnInProgress: gameRoom.turnInProgress,
 			turn: gameRoom.turn,
 			whoseTurn: gameRoom.whoseTurn() ? gameRoom.whoseTurn().name : null, // null, so the empty value still gets passed to the client
-			keyword: gameRoom.keyword,
 			hint: gameRoom.hint,
 			fakerName: gameRoom.faker ? gameRoom.faker.name : undefined,
 			strokes: gameRoom.strokes,
@@ -182,11 +185,6 @@ const ClientAdapter = {
 		if(pickFields) {
 			res = _.pick(res, pickFields);
 		}
-		return res;
-	},
-	hideKeyword(stateJson) {
-		let res = _.cloneDeep(stateJson);
-		res.keyword = '???';
 		return res;
 	},
 	hideFaker(stateJson) {

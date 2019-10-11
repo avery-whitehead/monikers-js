@@ -40,9 +40,6 @@ const app = new Vue({
 		},
 		selectedCards() {
 			return this.state.gameState && this.state.gameState.getSelctedCards();
-		},
-		playableCards() {
-			return this.state.gameState && this.state.gameState.getPlayableCards();
 		}
 	},
 });

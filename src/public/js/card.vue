@@ -15,7 +15,11 @@ export default {
         name: String,
         description: String,
         category: String,
-        points: String
+        points: Number,
+        collected: {
+            type: Boolean,
+            default: false
+        }
     },
     computed: {
         cardTypeClass() {

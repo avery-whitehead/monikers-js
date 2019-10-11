@@ -45,18 +45,26 @@
 						<span class="crown" :style="{visibility: red.captain ? 'visible' : 'hidden'}">👑</span>{{red.name}}
 					</li>
 				</ul>
+				<p>SCORE</p>
+				<p>{{this.gameState.redCards.reduce((sum, cur) => sum + cur.points, 0)}}</p>
 			</div>
 			<div class="stripe stripe-content">
+				<div id="round-info">
+					<p>ROUND {{this.gameState.round}}</p>
+					<p v-if="this.gameState.round === 1">Anything goes!</p>
+					<p v-if="this.gameState.round === 2">Only one word!</p>
+					<p v-if="this.gameState.round === 3">No words allowed!</p>
+				</div>
 				<div id="countdown-timer" v-if="this.gameState.turnInProgress" :style="{visibility: this.countdown >= 0 ? 'visible' : 'hidden'}">{{countdown}}</div>
 				<button v-if="thisUser.captain && !this.gameState.turnInProgress" type="submit" id="ready-btn" class="btn primary" @click="ready()">Ready?</button>
 				<card
 					v-if="thisUser.captain && this.gameState.turnInProgress"
 					class="stripe-content card"
-					v-bind:key="this.gameState.playableCards[this.gameState.cardIdx].name"
-					v-bind:name="this.gameState.playableCards[this.gameState.cardIdx].name"
-					v-bind:description="this.gameState.playableCards[this.gameState.cardIdx].description"
-					v-bind:category="this.gameState.playableCards[this.gameState.cardIdx].category"
-					v-bind:points="this.gameState.playableCards[this.gameState.cardIdx].points"
+					v-bind:key="this.gameState.selectedCards[this.gameState.cardIdx].name"
+					v-bind:name="this.gameState.selectedCards[this.gameState.cardIdx].name"
+					v-bind:description="this.gameState.selectedCards[this.gameState.cardIdx].description"
+					v-bind:category="this.gameState.selectedCards[this.gameState.cardIdx].category"
+					v-bind:points="this.gameState.selectedCards[this.gameState.cardIdx].points"
 				/>
 				<card
 					v-if="!thisUser.captain || (thisUser.captain && !this.gameState.turnInProgress)"
@@ -69,8 +77,12 @@
 					points="_"
 				/>
 				<div class="stripe stripe-content">
-					<button v-if="thisUser.captain" type="submit" id="next-card-btn" class="btn primary" @click="nextCard(true)">Correct!</button>
-					<button v-if="thisUser.captain" type="submit" id="next-card-btn" class="btn secondary" @click="nextCard(false)">Skip Card</button>
+					<button v-if="thisUser.captain && this.gameState.turnInProgress" type="submit" id="next-card-btn" class="btn primary" @click="nextCard(true)">Correct!</button>
+					<button v-if="thisUser.captain && this.gameState.turnInProgress" type="submit" id="next-card-btn" class="btn secondary" @click="nextCard(false)">Skip Card</button>
+				</div>
+				<div class="stripe stripe-content">
+					<p>CARDS REMAINING</p>
+					<p>{{this.gameState.selectedCards.filter(c => c.collected === false).length}}</p>
 				</div>
 			</div>
 			<div class="stripe-content" id="blue-team">
@@ -80,6 +92,8 @@
 						{{blue.name}}<span class="crown" :style="{visibility: blue.captain ? 'visible' : 'hidden'}">👑</span>
 					</li>
 				</ul>
+				<p>SCORE</p>
+				<p>{{this.gameState.blueCards.reduce((sum, cur) => sum + cur.points, 0)}}</p>
 			</div>
 		</div>
 	</div>
@@ -92,6 +106,7 @@ const GAME_PHASE = require('../../common/game-phase');
 const CONNECTION_STATE = require('./connection-state');
 import Card from './card';
 import ConnectionOverlay from './connection-overlay';
+const timerLimit = 5;
 
 export default {
 	name: 'GameView',
@@ -112,7 +127,7 @@ export default {
 	data() {
 		return {
 			selected: [],
-			countdown: 3
+			countdown: timerLimit
 		}
 	},
 	computed: {
@@ -158,9 +173,6 @@ export default {
 		},
 		ready() {
 			Store.submitTurnStart();
-			console.log(this.gameState.selectedCards);
-			console.log(this.gameState.playableCards);
-			console.log(this.gameState.cardIdx);
 		},
 		countdownTimer() {
 			if (this.countdown >= 0) {
@@ -172,7 +184,7 @@ export default {
 				if (this.thisUser.captain) {
 					Store.submitTurnEnd();
 				}
-				this.countdown = 10;
+				this.countdown = timerLimit;
 			}
 		},
 		nextCard(correct) {
