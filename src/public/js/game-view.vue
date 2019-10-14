@@ -59,6 +59,7 @@
 				</div>
 				<div id="countdown-timer" v-if="this.gameState.turnInProgress" :style="{visibility: this.countdown >= 0 ? 'visible' : 'hidden'}">{{countdown}}</div>
 				<button v-if="thisUser.captain && !this.gameState.turnInProgress" type="submit" id="ready-btn" class="btn primary" @click="ready()">Ready?</button>
+				<button v-if="!thisUser.captain && !this.gameState.turnInProgress" type="submit" id="ready-invis" class="btn primary">Ready?</button>
 				<card
 					v-if="thisUser.captain && this.gameState.turnInProgress"
 					class="stripe-content card"

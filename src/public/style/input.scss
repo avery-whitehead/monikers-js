@@ -59,6 +59,12 @@
 	&#ready-btn {
 		margin-bottom: 35px;
 	}
+	&#ready-invis {
+		margin-bottom: 35px;
+		cursor: default;
+		border-color: white;
+		background-color: white;
+	}
 	&:disabled {
 		border-color: var(--blue0);
 		background-color: white;
