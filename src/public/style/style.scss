@@ -487,6 +487,12 @@ canvas#new-paint {
 		font-weight: bold;
 	}
 
+	#next-btns-invis button {
+		border-color: white;
+		background-color: white;
+		color: white;
+		cursor: default;
+	}
 }
 
 .canvas-aligned {

@@ -83,6 +83,10 @@
 					<button v-if="thisUser.captain && this.gameState.turnInProgress" type="submit" id="next-card-btn" class="btn primary" @click="nextCard(true)">Correct!</button>
 					<button v-if="thisUser.captain && this.gameState.turnInProgress" type="submit" id="next-card-btn" class="btn secondary" @click="nextCard(false)">Skip Card</button>
 				</div>
+				<div class="stripe stripe-content" id="next-btns-invis">
+					<button v-if="!thisUser.captain || !this.gameState.turnInProgress" type="submit" id="next-card-btn" class="btn primary">Correct!</button>
+					<button v-if="!thisUser.captain || !this.gameState.turnInProgress" type="submit" id="next-card-btn" class="btn secondary">Skip Card</button>
+				</div>
 				<div v-if="this.gameState.round > 0" class="stripe stripe-content">
 					<p id="cards-remaining-title">CARDS REMAINING</p>
 					<p id="cards-remaining-value">{{this.gameState.selectedCards.filter(c => c.collected === false).length}}</p>
