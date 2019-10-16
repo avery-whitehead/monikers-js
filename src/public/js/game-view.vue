@@ -181,6 +181,7 @@ export default {
 			Store.submitCards(this.selected);
 		},
 		ready() {
+			console.log(this.gameState.selectedCards);
 			Store.submitTurnStart();
 		},
 		countdownTimer() {

@@ -58,6 +58,7 @@ class GameRoom {
 	startNewRound() {
 		if (this.round === 0) {
 			this.cards = _.sampleSize(cardsJson, this.users.length * 10);
+			this.cards.forEach(c => c.collected = false);
 			this.users = Util.sortByTeam(this.users);
 		}
 		this.round++;

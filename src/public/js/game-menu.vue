@@ -1,9 +1,6 @@
 <template>
     <div id="game-menu" class="dropup">
         <button id="game-menu-btn" class="flex-center" :class="{expanded: expanded === true}" @click="toggle">
-			<svg class="feather">
-				<use xlink:href="feather-sprite.svg#more-horizontal"/>
-			</svg>
 		</button>
         <div id="game-menu-dropdown" class="dropup-content" v-if="expanded === true">
             <ul class="dropup-list">
